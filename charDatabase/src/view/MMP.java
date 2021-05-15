@@ -40,13 +40,13 @@ public class MMP {
 		diceB = new JButton("Open Dice Roller");
 		
 		frame.setTitle("Main Menu");
-		frame.setSize(910,700);
+		frame.setSize(560,670);
 		
 		JPanel viewBP = new JPanel();
 		viewBP.setSize(455,700);
-		frame.add(viewBP, BorderLayout.LINE_START);
+		frame.add(viewBP, BorderLayout.NORTH);
 		//view button config
-		viewB.setPreferredSize(new Dimension(455, 665));
+		viewB.setPreferredSize(new Dimension(400, 200));
 		viewB.setOpaque(true);
 		viewB.setBackground(new Color(41, 142, 208));
 		viewB.setForeground(Color.white);
@@ -58,7 +58,7 @@ public class MMP {
 		ccBP.setSize(455,700);
 		frame.add(ccBP, BorderLayout.CENTER);
 		//create character button config
-		ccB.setPreferredSize(new Dimension(455, 665));
+		ccB.setPreferredSize(new Dimension(400, 200));
 		ccB.setOpaque(true);
 		ccB.setBackground(new Color(41, 142, 208));
 		ccB.setForeground(Color.white);
@@ -68,15 +68,15 @@ public class MMP {
 		
 		JPanel diceBP = new JPanel();
 		ccBP.setSize(455,700);
-		frame.add(diceBP, BorderLayout.NORTH);
+		frame.add(diceBP, BorderLayout.SOUTH);
 		//Dice Roller button config
-		diceB.setPreferredSize(new Dimension(455, 665));
+		diceB.setPreferredSize(new Dimension(400, 200));
 		diceB.setOpaque(true);
 		diceB.setBackground(new Color(41, 142, 208));
 		diceB.setForeground(Color.white);
 		diceB.setBorderPainted(false);
 		diceB.setFont(new Font("Arial", Font.BOLD, 40));
-		diceBP.add(ccB);
+		diceBP.add(diceB);
 		
 		//frame finishing touches
 		frame.setVisible(true);

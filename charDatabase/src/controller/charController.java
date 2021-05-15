@@ -26,6 +26,8 @@ public class charController {
 		
 		public static void main(String[] args) {
 			JFrame frame = new JFrame();
+			MMP menu = new MMP(frame);
+			
 			
 	}
 
