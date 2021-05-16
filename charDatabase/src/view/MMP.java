@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +23,7 @@ public class MMP {
 	private JButton ccB; //create character button
 	private JButton diceB; //dice page button
 	private JFrame frame;
+	private JFrame popFrame; //for popup dice roller
 	
 	/**
 	 * Creates UI for Main Menu Page.
@@ -114,6 +116,17 @@ public class MMP {
 	{
 		diceB.addActionListener(listenDice);
 	
+	}
+	public void addPopup()
+	{
+		popFrame = new JFrame("Dice Roller");
+		popFrame.setLayout(new BorderLayout());
+		
+		JLayeredPane popup = new JLayeredPane();
+		popFrame.getContentPane().add(popup);
+		
+		popFrame.setSize(700,400);
+		popFrame.setVisible(true);
 	}
 	
 }
