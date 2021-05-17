@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import view.*;
 
@@ -11,24 +14,43 @@ import view.*;
  */
 public class charController {
 
+	
+	private static JFrame frame;
+	
+	/**
+	* constructor for character controller
+	* @param frame used to draw the pages
+	*/
+	public charController(JFrame frame) 
+	{
+		this.frame = frame;
+	}
+	
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		MMP menu = new MMP(frame);
+		GoDiceRollerL d = new GoDiceRollerL(menu);
+		menu.addDiceListener(d);
 		
-		private static JFrame frame;
+	}
+	
+	/**
+	 * Opens pop up for dice roller page
+	 * @author Marco
+	 *
+	 */
+	static class GoDiceRollerL implements ActionListener
+	{
 		
-		/**
-		 * constructor for character controller
-		 * @param frame used to draw the pages
-		 */
-		public charController(JFrame frame) 
+		MMP menu;
+		public GoDiceRollerL(MMP menu){
+			this.menu = menu;
+		}
+		public void actionPerformed(ActionEvent e)
 		{
-			this.frame = frame;
+			menu.addPopup(); 
 		}
 		
-		
-		public static void main(String[] args) {
-			JFrame frame = new JFrame();
-			MMP menu = new MMP(frame);
-			
-			
 	}
-
 }

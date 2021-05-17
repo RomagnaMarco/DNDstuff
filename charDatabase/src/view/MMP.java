@@ -23,7 +23,7 @@ public class MMP {
 	private JButton ccB; //create character button
 	private JButton diceB; //dice page button
 	private JFrame frame;
-	private JFrame popFrame; //for popup dice roller
+	public JFrame popFrame; //for popup dice roller
 	
 	/**
 	 * Creates UI for Main Menu Page.
@@ -117,6 +117,10 @@ public class MMP {
 		diceB.addActionListener(listenDice);
 	
 	}
+	
+	/**
+	 * allows for creation of dice roller pop up
+	 */
 	public void addPopup()
 	{
 		popFrame = new JFrame("Dice Roller");
