@@ -49,13 +49,14 @@ public class charController {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
+			//checks if previously opened or not.
 			if(menu.popBool == false)
 			{
-				menu.addPopup(); 
+				menu.addPopup(); //opens if not yet opened
 			}
 			else
 			{
-				menu.popFrame.setVisible(true);
+				menu.popFrame.setVisible(true); //un-hides if previously hidden( and opened ).
 			}
 			
 		}
