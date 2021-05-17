@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ public class MMP {
 	private JButton diceB; //dice page button
 	private JFrame frame;
 	public JFrame popFrame; //for popup dice roller
+	public Boolean popBool; //is one up or not.
 	
 	/**
 	 * Creates UI for Main Menu Page.
@@ -86,6 +88,7 @@ public class MMP {
 		frame.repaint();
 		frame.revalidate();
 		
+		popBool = false;
 	}
 	
 	/**
@@ -123,11 +126,13 @@ public class MMP {
 	 */
 	public void addPopup()
 	{
+		popBool = true;
 		popFrame = new JFrame("Dice Roller");
 		popFrame.setLayout(new BorderLayout());
 		
 		JLayeredPane popup = new JLayeredPane();
 		popFrame.getContentPane().add(popup);
+		popFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		popFrame.setSize(700,400);
 		popFrame.setVisible(true);

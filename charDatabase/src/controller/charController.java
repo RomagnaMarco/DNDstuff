@@ -49,7 +49,15 @@ public class charController {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			menu.addPopup(); 
+			if(menu.popBool == false)
+			{
+				menu.addPopup(); 
+			}
+			else
+			{
+				menu.popFrame.setVisible(true);
+			}
+			
 		}
 		
 	}
