@@ -3,12 +3,15 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -138,7 +141,13 @@ public class MMP {
 	 */
 	public void addPopup()
 	{
-		//dropdown setup
+		//prep work for layout
+		
+		//labels setup for dropDown Menu
+		
+		JPanel dicePanel = new JPanel();
+		GridLayout subLayout1 = new GridLayout(7,1);
+		dicePanel.setLayout(subLayout1);
 		Label d4, d6, d8, d10, d12, d20, bonus; // input for textPane of each dice/bonus
 		d4 = new Label("d4");
 		d6 = new Label("d6");
@@ -148,6 +157,8 @@ public class MMP {
 		d20 =  new Label("d20");
 		bonus = new Label("Bonus");
 		
+		//dropdown setup
+		
 		 Integer list[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 		JComboBox<Integer> DDd4 = new JComboBox<>(list); //drop down d4
 		JComboBox<Integer> DDd6 = new JComboBox<>(list); //drop down d6
@@ -156,127 +167,73 @@ public class MMP {
 		JComboBox<Integer> DDd12 = new JComboBox<>(list); //drop down d12
 		JComboBox<Integer> DDd20 = new JComboBox<>(list); //drop down d20
 		JComboBox<Integer> DDbonus = new JComboBox<>(list); //drop down bonus
+		dicePanel.add(DDd4);dicePanel.add(d4);
+		dicePanel.add(DDd6);dicePanel.add(d6);
+		dicePanel.add(DDd8);dicePanel.add(d8);
+		dicePanel.add(DDd10);dicePanel.add(d10);
+		dicePanel.add(DDd12);dicePanel.add(d12);
+		dicePanel.add(DDd20);dicePanel.add(d20);
+		dicePanel.add(DDbonus);dicePanel.add(bonus);
+		
+		
+		
+		//display setup
+		JPanel displayP = new JPanel();
+		GridLayout subLayout2 = new GridLayout(1,7);
+		displayP.setLayout(subLayout2);
+		ArrayList<JTextArea> arr = new ArrayList<>();
+		//adds new text areas in arrayList
+		for(int i = 0; i < 7; i++) //adds 8 text areas
+		{
+			arr.add(new JTextArea());
+		}
+		
+		for (int i =0; i < arr.size(); i++)
+		{
+			arr.get(i).setEditable(false);
+			displayP.add(arr.get(i));
+		}
+		
+		//buttons made
+		JButton clearB = new JButton("Clear");
+		JButton rollB = new JButton("Roll");
+		
+		//Left layout 
+		JPanel leftP = new JPanel();
+		GridLayout subLayout3 = new GridLayout(2,2);
+		leftP.setLayout(subLayout3);
+		leftP.add(displayP);
+		leftP.add(rollB);
+		
+		//Right Layout 
+		JPanel rightP = new JPanel();
+		GridLayout subLayout4 = new GridLayout(2,2);
+		rightP.setLayout(subLayout4);
+		rightP.add(dicePanel);
+		rightP.add(clearB);
 		
 		//pop up setup
 		popBool = true; // for hiding and closing condition
 		
+	
+		
+		//main layout
 		popFrame = new JFrame("Dice Roller"); //opens frame diceRoller
-		GridBagLayout layout = new GridBagLayout();
-		popFrame.setLayout(layout); //sets layout of frame to grid bag layout
+		GridLayout mainL = new GridLayout(1,1); //main Layout
+		popFrame.setLayout(mainL); //sets layout
+		popFrame.add(leftP);
+		popFrame.add(rightP);
 		
 		JLayeredPane popup = new JLayeredPane();
 		popFrame.getContentPane().add(popup);
 		popFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		
-		//setup constraints for layout
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.ipadx = 90;
-		gbc.ipady = 10;
+		popFrame.pack();
+			
 		
 		
-		//Layout x = 0
-		//1d4
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd4, gbc);
-		//1d6
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd6, gbc);
-		//1d8
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd8, gbc);
-		//1d10
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd10, gbc);
-		//1d12
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd12, gbc);
-		//1d20
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDd20, gbc);
-		//iBonus
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(DDbonus, gbc);
 		
-		// Layout x = 1
-		//1d4
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 5;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d4, gbc);
-		//1d6
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d6, gbc);
-		//1d8
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d8, gbc);
-		//1d10
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d10, gbc);
-		//1d12
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d12, gbc);
-		//1d20
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(d20, gbc);
-		//iBonus
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		popFrame.add(bonus, gbc);
-				
-		popFrame.setSize(700,400);
+		popFrame.setSize(300,300);
+		popFrame.setResizable(false);
 		popFrame.setVisible(true);
 	}
 	
