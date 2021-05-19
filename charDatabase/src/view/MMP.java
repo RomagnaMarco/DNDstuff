@@ -3,26 +3,18 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
 
 /**
  * Main Menu Page.
@@ -35,7 +27,7 @@ public class MMP {
 	private JButton viewB; //view character button
 	private JButton ccB; //create character button
 	private JButton diceB; //dice page button
-	private JFrame frame;
+	public  JFrame frame;
 	public JFrame popFrame; //for popup dice roller
 	public Boolean popBool; //is one up or not.
 	
@@ -175,21 +167,17 @@ public class MMP {
 		dicePanel.add(DDd20);dicePanel.add(d20);
 		dicePanel.add(DDbonus);dicePanel.add(bonus);
 		
-		
-		
 		//display setup
 		JPanel displayP = new JPanel();
 		GridLayout subLayout2 = new GridLayout(1,7);
 		displayP.setLayout(subLayout2);
 		ArrayList<JTextArea> arr = new ArrayList<>();
 		//adds new text areas in arrayList
-		for(int i = 0; i < 7; i++) //adds 8 text areas
-		{
+		for(int i = 0; i < 7; i++) {//adds 8 text areas
 			arr.add(new JTextArea());
 		}
 		
-		for (int i =0; i < arr.size(); i++)
-		{
+		for (int i =0; i < arr.size(); i++){ //Sets all to non-editable and adds them
 			arr.get(i).setEditable(false);
 			displayP.add(arr.get(i));
 		}
@@ -198,41 +186,26 @@ public class MMP {
 		JButton clearB = new JButton("Clear");
 		JButton rollB = new JButton("Roll");
 		
-		//Left layout 
-		JPanel leftP = new JPanel();
-		GridLayout subLayout3 = new GridLayout(2,2);
-		leftP.setLayout(subLayout3);
-		leftP.add(displayP);
-		leftP.add(rollB);
-		
-		//Right Layout 
-		JPanel rightP = new JPanel();
-		GridLayout subLayout4 = new GridLayout(2,2);
-		rightP.setLayout(subLayout4);
-		rightP.add(dicePanel);
-		rightP.add(clearB);
-		
 		//pop up setup
 		popBool = true; // for hiding and closing condition
 		
-	
-		
 		//main layout
 		popFrame = new JFrame("Dice Roller"); //opens frame diceRoller
-		GridLayout mainL = new GridLayout(1,1); //main Layout
-		popFrame.setLayout(mainL); //sets layout
-		popFrame.add(leftP);
-		popFrame.add(rightP);
+		JPanel panel = new JPanel();
+		GridLayout mainL = new GridLayout(2,2); //main Layout
+		panel.setLayout(mainL); //sets layout
+		
+		panel.add(displayP);
+		panel.add(dicePanel);
+		panel.add(rollB);
+		panel.add(clearB);
+		popFrame.add(panel);
+		popFrame.pack();
 		
 		JLayeredPane popup = new JLayeredPane();
 		popFrame.getContentPane().add(popup);
 		popFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		popFrame.pack();
-			
-		
-		
-		
-		popFrame.setSize(300,300);
+		popFrame.setSize(300,390);
 		popFrame.setResizable(false);
 		popFrame.setVisible(true);
 	}
