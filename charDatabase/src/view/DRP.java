@@ -28,6 +28,14 @@ public class DRP
 	ArrayList<JTextArea> arr; //popFrame display
 	JButton rollB; //button to roll dice
 	JButton clearB; //button to clear dice dropdown
+	JComboBox<Integer> DDd4;
+	JComboBox<Integer> DDd6;
+	JComboBox<Integer> DDd8;
+	JComboBox<Integer> DDd10;
+	JComboBox<Integer> DDd12;
+	JComboBox<Integer> DDd20;
+	JComboBox<Integer> DDbonus;
+	ArrayList<JComboBox<Integer>> JCBL;
 	
 	public DRP(Boolean popBool)
 	{
@@ -48,16 +56,16 @@ public class DRP
 		bonus = new Label("Bonus");
 		
 		//dropdown setup
-		
+		JCBL = new ArrayList<>();
 		Integer list[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 		Integer list2[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-		JComboBox<Integer> DDd4 = new JComboBox<>(list); //drop down d4
-		JComboBox<Integer> DDd6 = new JComboBox<>(list); //drop down d6
-		JComboBox<Integer> DDd8 = new JComboBox<>(list); //drop down d8
-		JComboBox<Integer> DDd10 = new JComboBox<>(list); //drop down d10
-		JComboBox<Integer> DDd12 = new JComboBox<>(list); //drop down d12
-		JComboBox<Integer> DDd20 = new JComboBox<>(list); //drop down d20
-		JComboBox<Integer> DDbonus = new JComboBox<>(list2); //drop down bonus
+		DDd4 = new JComboBox<>(list); //drop down d4
+		DDd6 = new JComboBox<>(list); //drop down d6
+		DDd8 = new JComboBox<>(list); //drop down d8
+		DDd10 = new JComboBox<>(list); //drop down d10
+		DDd12 = new JComboBox<>(list); //drop down d12
+		DDd20 = new JComboBox<>(list); //drop down d20
+		DDbonus = new JComboBox<>(list2); //drop down bonus
 		dicePanel.add(DDd4);dicePanel.add(d4);
 		dicePanel.add(DDd6);dicePanel.add(d6);
 		dicePanel.add(DDd8);dicePanel.add(d8);
@@ -65,6 +73,15 @@ public class DRP
 		dicePanel.add(DDd12);dicePanel.add(d12);
 		dicePanel.add(DDd20);dicePanel.add(d20);
 		dicePanel.add(DDbonus);dicePanel.add(bonus);
+		
+		//add comboboxes to JCBL
+		JCBL.add(DDd4);
+		JCBL.add(DDd6);
+		JCBL.add(DDd8);
+		JCBL.add(DDd10);
+		JCBL.add(DDd12);
+		JCBL.add(DDd20);
+		JCBL.add(DDbonus);
 		
 		//display setup
 		JPanel displayP = new JPanel();
@@ -143,6 +160,16 @@ public class DRP
 	{
 		clearB.addActionListener(listenClear);
 	
+	}
+	
+	/**
+	 * From DRP has drowndowns for dice
+	 * @return the list of JComboBoxes compromising the values of the dice rolls
+	 */
+	public ArrayList<JComboBox<Integer>> getDropdownList()
+	{
+		return JCBL;
+		
 	}
 	
 }

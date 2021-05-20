@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
@@ -57,8 +58,10 @@ public class charController {
 			if(menu.popBool == false)
 			{
 				DRP drp = new DRP(menu.popBool);
-				UpdateDisplay mr = new UpdateDisplay(drp);
-				drp.addRollListener(mr);
+				UpdateDisplay uD = new UpdateDisplay(drp);
+				RefreshDice rD = new RefreshDice(drp);
+				drp.addRollListener(uD);
+				drp.addClearListener(rD);
 			}
 			else
 			{
@@ -72,7 +75,12 @@ public class charController {
 	
 	
 	
-	
+	/**
+	 * Updates the display for DRP for view.
+	 * Uses modRollDisplay() method to alter it.
+	 * @author Marco
+	 *
+	 */
 	static class UpdateDisplay implements ActionListener
 	{
 		DRP drp;
@@ -89,6 +97,7 @@ public class charController {
 	}
 	
 	/**
+	 * Affects DRP
 	 * modifies display when Roll button is clicked
 	 * Rolls dice with greater value than 0 and the bonus on display
 	 * @param arr
@@ -101,4 +110,38 @@ public class charController {
 		
 	}
 	
+	/**
+	 * Affects DRP
+	 * clears all dice and bonus to 0 when clear is clicked
+	 * uses refreshDice() method to clear
+	 * @author Marco
+	 *
+	 */
+	static class RefreshDice implements ActionListener
+	{
+		DRP drp;
+		public RefreshDice(DRP drp)
+		{
+			this.drp = drp;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			refreshDice(drp);
+			
+		}
+		
+	}
+	
+	/**
+	 * clears dice dropdrown on page. sets all to 0
+	 * @param drp
+	 */
+	public static void refreshDice(DRP drp)
+	{
+		ArrayList<JComboBox<Integer>> list = drp.getDropdownList();
+		for(int i = 0; i < list.size(); i++)
+		{
+			list.get(i).setSelectedItem(0);
+		}
+	}
 }
