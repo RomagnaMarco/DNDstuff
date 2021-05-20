@@ -2,8 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
 import view.*;
 
 
@@ -33,6 +36,7 @@ public class charController {
 		GoDiceRollerL d = new GoDiceRollerL(menu);
 		menu.addDiceListener(d);
 		
+		
 	}
 	
 	/**
@@ -52,14 +56,49 @@ public class charController {
 			//checks if previously opened or not.
 			if(menu.popBool == false)
 			{
-				menu.addPopup(); //opens if not yet opened
+				DRP drp = new DRP(menu.popBool);
+				UpdateDisplay mr = new UpdateDisplay(drp);
+				drp.addRollListener(mr);
 			}
 			else
 			{
-				menu.popFrame.setVisible(true); //un-hides if previously hidden( and opened ).
+				DRP.popFrame.setVisible(true); //un-hides if previously hidden( and opened ).
 			}
 			
 		}
 		
 	}
+	
+	
+	
+	
+	
+	static class UpdateDisplay implements ActionListener
+	{
+		DRP drp;
+		public UpdateDisplay(DRP drp)
+		{
+			this.drp = drp;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			modRollDisplay(drp.getDisplay());
+			
+		}
+		
+	}
+	
+	/**
+	 * modifies display when Roll button is clicked
+	 * Rolls dice with greater value than 0 and the bonus on display
+	 * @param arr
+	 */
+	public static void modRollDisplay(ArrayList<JTextArea> arr)
+	{
+		//9 text areas. 0-8. but first one says Result:
+		//1-8 are available to show dice.
+		arr.get(1).setText("test");
+		
+	}
+	
 }
