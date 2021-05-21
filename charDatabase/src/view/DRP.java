@@ -164,11 +164,27 @@ public class DRP
 	
 	/**
 	 * From DRP has drowndowns for dice
-	 * @return the list of JComboBoxes compromising the values of the dice rolls
+	 * @return the list of JComboBoxes compromising the values of the dice quantities
 	 */
 	public ArrayList<JComboBox<Integer>> getDropdownList()
 	{
 		return JCBL;
+		
+	}
+	
+
+	/**
+	 * From DRP has  dice quantities
+	 * @return the list of values selected
+	 */
+	public ArrayList<Integer> getDiceRollList()
+	{
+		ArrayList<Integer> values = new ArrayList<>();
+		for(int i = 0; i < JCBL.size(); i++)
+		{
+			values.add((Integer) JCBL.get(i).getSelectedItem());
+		}
+		return values;
 		
 	}
 	
