@@ -126,7 +126,7 @@ public class DRP
 		popFrame.pack();
 		
 		popFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		popFrame.setSize(300,390);
+		popFrame.setSize(600,390);
 		popFrame.setResizable(false);
 		popFrame.setVisible(true);
 			

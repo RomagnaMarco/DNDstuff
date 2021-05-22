@@ -19,7 +19,7 @@ import view.*;
  */
 public class charController {
 
-	
+	private static Boolean DebugMRD = true;
 	private static JFrame frame;
 	
 	/**
@@ -105,8 +105,8 @@ public class charController {
 	 */
 	public static void modRollDisplay(DRP drp){
 		
-		ArrayList<JTextArea> arr = drp.getDisplay();
-		ArrayList<Integer> list = drp.getDiceRollList();
+		ArrayList<JTextArea> displayList = drp.getDisplay();
+		ArrayList<Integer> DRlist = drp.getDiceRollList();
 		ArrayList<Integer> diceRow = new ArrayList<>();
 		
 		//9 text areas. 0-8. but first one says Result:
@@ -116,73 +116,116 @@ public class charController {
 		String strDice = "";
 		Integer result = 0;
 		Integer rowResult = 0;
-		arr.get(0).setText("Result: "); //reinitialize
-		
-		for(int listIndex = 0; listIndex < list.size();listIndex ++)
+		displayList.get(0).setText("Result: "); //reinitialize
+		int numDice = DRlist.size()-1;
+		for(int listIndex = 0; listIndex < numDice+1; listIndex++)
 		{
+			DebugMRD("\n"+"Entering For(Loop). Index: "+listIndex+"/"+numDice+"\n");
 			String displayRow= "";
 			strDice = "";
 			strEnd = "): ";
 			//populates each dice Row
 			if(listIndex  == 0) //d4
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				strFront = "D4(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,5));}
+				for(int j = 0; j < DRlist.get(listIndex); j++){
+					diceRow.add(DiceRoll(1,5));
+					}
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex == 1) //d6
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				strFront = "D6(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,7));}	
+				for(int j = 0; j < DRlist.get(listIndex ); j++){
+					diceRow.add(DiceRoll(1,7));
+				}
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 2) //d8
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				
 				strFront = "D8(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,8));}
+				for(int j = 0; j < DRlist.get(listIndex ); j++){
+					diceRow.add(DiceRoll(1,8));
+					}
+				
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 3) //d10
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				
 				strFront = "D10(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,11));}
+				for(int j = 0; j < DRlist.get(listIndex ); j++){
+					diceRow.add(DiceRoll(1,11));
+					}
+				
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 4) //d12
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				
 				strFront = "D12(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,13));}
+				for(int j = 0; j < DRlist.get(listIndex ); j++){
+					diceRow.add(DiceRoll(1,13));
+					}
+				
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 5) //d20
 			{
+				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				
 				strFront = "D20(";
-				for(int j = 0; j < list.get(listIndex ); j++){diceRow.add(DiceRoll(1,21));}
+				for(int j = 0; j < DRlist.get(listIndex ); j++){
+					diceRow.add(DiceRoll(1,21));
+				}
+				
+				DebugMRD("DiceRow num of dice= "+ diceRow.size());
 			}
 			else //bonus
 			{
+				DebugMRD("@ "+listIndex+"\n"+"Bonus Reached");
 				strFront = "Bonus: ";
+				diceRow.add(DRlist.get(listIndex)); //just gets the num of bonus
 				strEnd = "";
 			}
 			
+			rowResult = 0;
 			//adds values and also converts them to string to display for each row
 			for(int rowIndex = 0; rowIndex < diceRow.size(); rowIndex++)
 			{
-				rowResult = 0;
+				
 				rowResult += diceRow.get(rowIndex);
-				result+= rowResult;
-				strDice += diceRow.get(rowIndex).toString();
+				if(listIndex != numDice)
+					strDice += diceRow.get(rowIndex).toString();
 				if(rowIndex != diceRow.size()-1) //dont add + to string on last dice
 				{
 					strDice += "+";
 				}
 				
 			}
-			strDice  += "= "+ rowResult.toString();
-			displayRow = strFront+list.get(listIndex)+strEnd+strDice;
-			//for every row after row 0, set the text to display row for a row after the index
-			if(listIndex  != list.size()) // don't do this for the last row with the bonus
-			{
-				arr.get(listIndex +1).setText(displayRow);
-			}
+			result += rowResult;
+			if(listIndex != numDice)
+				strDice  += "= "+ rowResult.toString();
+			displayRow = strFront+DRlist.get(listIndex)+strEnd+strDice;
+			
+			displayList.get(listIndex + 1).setText(displayRow); //set text to display row after index
+			
+			diceRow.clear();
 		}
 				
-		arr.get(0).append(result.toString()); //result of all dice
+		displayList.get(0).append(result.toString()); //result of all dice
 	}
 	
 	/**
@@ -232,5 +275,18 @@ public class charController {
 		 int max = (int) Math.floor(high);
 		 return (int) Math.floor(Math.random()*(max - min) + min);
 	 }
+	
+	/**
+	 * Debugger for ModRollDisplay. Switch local variable on in charController to see Debug messages
+	 * private. no using in other classes.
+	 * @param message takes in debug message to print
+	 */
+	private static void DebugMRD(String message)
+	{
+		if(DebugMRD == true)
+		{
+			System.out.println(message);
+		}
+	}
 	
 }
