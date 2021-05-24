@@ -37,7 +37,7 @@ public class DRP
 	JComboBox<Integer> DDbonus;
 	ArrayList<JComboBox<Integer>> JCBL;
 	
-	public DRP(Boolean popBool)
+	public DRP()
 	{
 		//prep work for layout
 		
@@ -108,9 +108,6 @@ public class DRP
 		//buttons made
 		clearB = new JButton("Clear"); //clears dice dropdown
 		rollB = new JButton("Roll");
-	
-		//pop up setup
-		popBool = true; // for hiding and closing condition
 		
 		//main layout
 		popFrame = new JFrame("Dice Roller"); //opens frame diceRoller

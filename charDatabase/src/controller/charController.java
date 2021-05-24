@@ -21,6 +21,7 @@ public class charController {
 
 	private static Boolean DebugMRD = true;
 	private static JFrame frame;
+	static Boolean DRPBool= false; //value to remember if DRP is shown yet
 	
 	/**
 	* constructor for character controller
@@ -36,7 +37,9 @@ public class charController {
 		JFrame frame = new JFrame();
 		MMP menu = new MMP(frame);
 		GoDiceRollerL d = new GoDiceRollerL(menu);
+		GoCC1L cc1 = new GoCC1L(menu);
 		menu.addDiceListener(d);
+		menu.addCCListener(cc1);
 		
 		
 	}
@@ -56,9 +59,10 @@ public class charController {
 		public void actionPerformed(ActionEvent e)
 		{
 			//checks if previously opened or not.
-			if(menu.popBool == false)
+			if(DRPBool == false)
 			{
-				DRP drp = new DRP(menu.popBool);
+				DRPBool = true; //make it so it remembers this in the controller. will prevent dupes
+				DRP drp = new DRP();
 				UpdateDisplay uD = new UpdateDisplay(drp);
 				RefreshDice rD = new RefreshDice(drp);
 				drp.addRollListener(uD);
@@ -73,7 +77,50 @@ public class charController {
 		
 	}
 	
+	/**
+	 * Sends to CC1P (character creation phase 1 page)
+	 * @author Marco
+	 *
+	 */
+	static class GoCC1L implements ActionListener
+	{
+		CC1P cc1;
+		MMP menu;
+		public GoCC1L(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			cc1 = new CC1P(menu.frame);
+			GotoMMPL b = new GotoMMPL(menu.frame);
+			cc1.addBackListener(b);
+		}
+		
+	}
 	
+	/**
+	 * Sends back to MainMenuPage from another page
+	 * @author Marco
+	 *
+	 */
+	static class GotoMMPL implements ActionListener
+	{
+		JFrame frame;
+		public GotoMMPL(JFrame frame)
+		{
+			this.frame = frame;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			MMP menu = new MMP(frame);
+			GoDiceRollerL d = new GoDiceRollerL(menu);
+			GoCC1L cc1 = new GoCC1L(menu);
+			menu.addDiceListener(d);
+			menu.addCCListener(cc1);
+		}
+		
+	}
 	
 	
 	/**

@@ -28,7 +28,7 @@ public class MMP {
 	private JButton ccB; //create character button
 	private JButton diceB; //dice page button
 	public  JFrame frame;
-	public Boolean popBool; //is one up or not.
+	public Boolean popBool; //is DRP up or not.
 	
 	
 	/**
