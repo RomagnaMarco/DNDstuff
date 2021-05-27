@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -18,13 +19,16 @@ public class CC1P {
 
 	public JFrame frame;
 	
-	public JButton back;
-	public JButton cont;
+	private JButton back;
+	private JButton cont;
+	private JPanel spacer;
+	private JPanel navP;
 	
 	
-	//redraws frame given by Main Menu
+	
 	public CC1P(JFrame frame)
 	{
+		//redraws frame given by Main Menu.
 		this.frame = frame;
 		frame.getContentPane().removeAll();
 		frame.setTitle("Character Creation - Phase 1");
@@ -32,9 +36,14 @@ public class CC1P {
 		
 		back = new JButton("Back");
 		cont = new JButton("Continue");
-		JPanel navP = new JPanel();
-		navP.add(back, BorderLayout.WEST);
-		navP.add(cont, BorderLayout.EAST);
+		navP = new JPanel();
+		spacer = new JPanel();
+		back.setPreferredSize(new Dimension(120, 30));
+		cont.setPreferredSize(new Dimension(120, 30));
+		spacer.setPreferredSize(new Dimension(250, 30));
+		navP.add(back, BorderLayout.LINE_START);
+		navP.add(spacer, BorderLayout.CENTER);
+		navP.add(cont, BorderLayout.LINE_END);
 		
 		//main layout 
 		JPanel displayP = new JPanel();
