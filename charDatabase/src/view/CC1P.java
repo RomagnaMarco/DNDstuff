@@ -38,9 +38,9 @@ public class CC1P {
 		cont = new JButton("Continue");
 		navP = new JPanel();
 		spacer = new JPanel();
-		back.setPreferredSize(new Dimension(120, 30));
-		cont.setPreferredSize(new Dimension(120, 30));
-		spacer.setPreferredSize(new Dimension(250, 30));
+		back.setPreferredSize(new Dimension(120, 40));
+		cont.setPreferredSize(new Dimension(120, 40));
+		spacer.setPreferredSize(new Dimension(250, 40));
 		navP.add(back, BorderLayout.LINE_START);
 		navP.add(spacer, BorderLayout.CENTER);
 		navP.add(cont, BorderLayout.LINE_END);
