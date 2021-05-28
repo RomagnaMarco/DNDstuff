@@ -23,6 +23,8 @@ public class CCP {
 	private JButton cont;
 	private JPanel spacer;
 	private JPanel navP;
+	private BorderLayout mainL;
+	private JPanel displayP;
 	
 	
 	
@@ -30,8 +32,17 @@ public class CCP {
 	{
 		//redraws frame given by Main Menu.
 		this.frame = frame;
+		
+	}
+	
+	/**
+	 * Creates Default setup.
+	 * from template.
+	 */
+	public void setup()
+	{
 		frame.getContentPane().removeAll();
-		frame.setTitle("Character Creation - Phase 1");
+		frame.setTitle("Default Character Creation Page - Modify this if Visible");
 		frame.setSize(560,670);
 		
 		back = new JButton("Back");
@@ -46,8 +57,8 @@ public class CCP {
 		navP.add(cont, BorderLayout.LINE_END);
 		
 		//main layout 
-		JPanel displayP = new JPanel();
-		BorderLayout mainL = new BorderLayout();
+		displayP = new JPanel();
+		mainL = new BorderLayout();
 		displayP.setLayout(mainL);
 		displayP.add(navP, BorderLayout.SOUTH);
 		
@@ -71,8 +82,61 @@ public class CCP {
 	
 	}
 	
+	/**
+	 * action listeners work for this continue button
+	 * @param listenCont
+	 */
 	public void addContListener(ActionListener listenCont)
 	{
 		cont.addActionListener(listenCont);
+	}
+	
+	
+	/**
+	 * allows for classes using this template to access the back button
+	 */
+	public JButton getBackButton()
+	{
+		return back;
+	}
+	
+	/**
+	 * allows for classes using this template to access the cont button
+	 */
+	public JButton getContButton()
+	{
+		return cont;
+	}
+	
+	/**
+	 * allows for classes using this template to access the spacer panel
+	 */
+	public JPanel getSpacer()
+	{
+		return spacer;
+	}
+	
+	/**
+	 * allows for classes using this template to access the navP panel
+	 */
+	public JPanel getNavP()
+	{
+		return navP;
+	}
+	
+	/**
+	 * allows for classes using this template to access the main layout
+	 */
+	public BorderLayout getMainL()
+	{
+		return mainL;
+	}
+	
+	/**
+	 * allows for classes using this template to access the display Panel
+	 */
+	public JPanel getDisplayP()
+	{
+		return displayP;
 	}
 }

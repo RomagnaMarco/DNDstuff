@@ -88,6 +88,8 @@ public class charController {
 	{
 		CC1P cc1;
 		MMP menu;
+		GoMMPL b;
+		GoCC2L c;
 		public GoCC1L(MMP menu)
 		{
 			this.menu = menu;
@@ -95,8 +97,11 @@ public class charController {
 		
 		public void actionPerformed(ActionEvent e) {
 			cc1 = new CC1P(menu.frame);
-			GotoMMPL b = new GotoMMPL(menu.frame);
+			b = new GoMMPL(menu.frame);
+			c = new GoCC2L(menu);
 			cc1.addBackListener(b);
+			cc1.addContListener(c);
+			
 		}
 		
 	}
@@ -106,20 +111,42 @@ public class charController {
 	 * @author Marco
 	 *
 	 */
-	static class GotoMMPL implements ActionListener
+	static class GoMMPL implements ActionListener
 	{
 		JFrame frame;
-		public GotoMMPL(JFrame frame)
+		MMP menu;
+		GoDiceRollerL d;
+		
+		GoCC1L cc1;
+		public GoMMPL(JFrame frame)
 		{
 			this.frame = frame;
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			MMP menu = new MMP(frame);
-			GoDiceRollerL d = new GoDiceRollerL(menu);
-			GoCC1L cc1 = new GoCC1L(menu);
+			menu = new MMP(frame);
+			d = new GoDiceRollerL(menu);
+			cc1 = new GoCC1L(menu);
 			menu.addDiceListener(d);
 			menu.addCCListener(cc1);
+		}
+		
+	}
+	
+	static public class GoCC2L implements ActionListener
+	{
+		CC2P cc2;
+		MMP menu;
+		GoCC1L b;
+		public GoCC2L(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			cc2 = new CC2P(menu.frame);
+			b = new GoCC1L(menu);
+			cc2.addBackListener(b);
 		}
 		
 	}

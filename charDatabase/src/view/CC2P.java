@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * Page 1 of Character Creation.
+ * Page 2 of Character Creation.
  * Works off of CCP class extension
  * Part of View in MVC arch
  * @author Marco
  *
  */
-public class CC1P extends CCP{
+public class CC2P extends CCP{
 	JButton back;
 	JButton cont;
 	JPanel spacer;
@@ -25,11 +25,11 @@ public class CC1P extends CCP{
 	 * Borrows from CCP template.
 	 * @param frame
 	 */
-	public CC1P(JFrame frame) 
+	public CC2P(JFrame frame) 
 	{
 		super(frame);
 		setup();
-		frame.setTitle("Character Creation - Phase 1");
+		frame.setTitle("Character Creation - Phase 2");
 	}
 	
 
