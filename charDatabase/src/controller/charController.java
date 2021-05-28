@@ -44,6 +44,8 @@ public class charController {
 		
 	}
 	
+	//Go -method/thing- L (L stands for listener) format
+	
 	/**
 	 * Opens pop up for dice roller page
 	 * @author Marco
