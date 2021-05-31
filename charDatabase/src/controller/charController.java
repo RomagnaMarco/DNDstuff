@@ -19,7 +19,7 @@ import view.*;
  */
 public class charController {
 
-	private static Boolean DebugMRD = true;
+	private static Boolean DebugMRD = false;
 	private static JFrame frame;
 	static Boolean DRPBool= false; //value to remember if DRP is shown yet
 	

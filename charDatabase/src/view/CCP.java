@@ -38,6 +38,7 @@ public class CCP {
 	/**
 	 * Creates Default setup.
 	 * from template.
+	 * Initializes default UI.
 	 */
 	public void setup()
 	{

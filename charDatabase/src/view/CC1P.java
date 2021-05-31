@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,6 +32,19 @@ public class CC1P extends CCP{
 		super(frame);
 		setup();
 		frame.setTitle("Character Creation - Phase 1");
+		
+		//Center section dealt with.
+		displayP = super.getDisplayP(); //initialize
+		
+		JButton setRoll = new JButton("Roll Sets");
+		setRoll.setPreferredSize(new Dimension(120, 40));
+		JPanel centerP = new JPanel();
+		GridLayout buttonTop = new GridLayout();
+		centerP.setLayout(buttonTop);
+		centerP.add(setRoll);
+		
+		displayP.add(centerP, BorderLayout.CENTER);
+		
 	}
 	
 
