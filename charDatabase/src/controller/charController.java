@@ -79,32 +79,6 @@ public class charController {
 		
 	}
 	
-	/**
-	 * Sends to CC1P (character creation phase 1 page)
-	 * @author Marco
-	 *
-	 */
-	static class GoCC1L implements ActionListener
-	{
-		CC1P cc1;
-		MMP menu;
-		GoMMPL b;
-		GoCC2L c;
-		public GoCC1L(MMP menu)
-		{
-			this.menu = menu;
-		}
-		
-		public void actionPerformed(ActionEvent e) {
-			cc1 = new CC1P(menu.frame);
-			b = new GoMMPL(menu.frame);
-			c = new GoCC2L(menu);
-			cc1.addBackListener(b);
-			cc1.addContListener(c);
-			
-		}
-		
-	}
 	
 	/**
 	 * Sends back to MainMenuPage from another page
@@ -133,11 +107,46 @@ public class charController {
 		
 	}
 	
+	
+	/**
+	 * Sends to CC1P (character creation phase 1 page)
+	 * @author Marco
+	 *
+	 */
+	static class GoCC1L implements ActionListener
+	{
+		CC1P cc1;
+		MMP menu;
+		GoMMPL b;
+		GoCC2L c;
+		public GoCC1L(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			cc1 = new CC1P(menu.frame);
+			b = new GoMMPL(menu.frame);
+			c = new GoCC2L(menu);
+			cc1.addBackListener(b);
+			cc1.addContListener(c);
+			
+		}
+		
+	}
+	
+	
+	/**
+	 * Sends to CC2P (character creation phase 2 page)
+	 * @author Marco
+	 *
+	 */
 	static public class GoCC2L implements ActionListener
 	{
 		CC2P cc2;
 		MMP menu;
 		GoCC1L b;
+		GoCC3L c;
 		public GoCC2L(MMP menu)
 		{
 			this.menu = menu;
@@ -146,7 +155,32 @@ public class charController {
 		public void actionPerformed(ActionEvent e) {
 			cc2 = new CC2P(menu.frame);
 			b = new GoCC1L(menu);
+			c = new GoCC3L(menu);
 			cc2.addBackListener(b);
+			cc2.addContListener(c);
+		}
+		
+	}
+	
+	/**
+	 * Sends to CC2P (character creation phase 2 page)
+	 * @author Marco
+	 *
+	 */
+	static public class GoCC3L implements ActionListener
+	{
+		CC3P cc3;
+		MMP menu;
+		GoCC2L b;
+		public GoCC3L(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			cc3 = new CC3P(menu.frame);
+			b = new GoCC2L(menu);
+			cc3.addBackListener(b);
 		}
 		
 	}
