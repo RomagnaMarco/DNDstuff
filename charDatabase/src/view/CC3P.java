@@ -28,7 +28,10 @@ public class CC3P extends CCP{
 	public CC3P(JFrame frame) 
 	{
 		super(frame);
-		setup();
+		setupFrame();
+		setupNavP();
+		setupMainL();
+		setupFinalize();
 		frame.setTitle("Character Creation - Phase 3");
 	}
 	

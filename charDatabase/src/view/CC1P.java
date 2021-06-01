@@ -22,6 +22,7 @@ public class CC1P extends CCP{
 	JPanel navP;
 	JPanel displayP;
 	BorderLayout mainL;
+	JFrame frame;
 	
 	/**
 	 * Borrows from CCP template.
@@ -30,9 +31,11 @@ public class CC1P extends CCP{
 	public CC1P(JFrame frame) 
 	{
 		super(frame);
-		setup();
+		setupFrame();
 		frame.setTitle("Character Creation - Phase 1");
 		
+		setupNavP();
+		setupMainL();
 		//Center section dealt with.
 		displayP = super.getDisplayP(); //initialize
 		
@@ -44,6 +47,8 @@ public class CC1P extends CCP{
 		centerP.add(setRoll);
 		
 		displayP.add(centerP, BorderLayout.CENTER);
+		
+		setupFinalize();
 		
 	}
 	

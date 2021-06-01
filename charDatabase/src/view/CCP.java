@@ -36,16 +36,21 @@ public class CCP {
 	}
 	
 	/**
-	 * Creates Default setup.
-	 * from template.
-	 * Initializes default UI.
+	 * Preps frame default for Character Creation Pages
 	 */
-	public void setup()
+	public void setupFrame()
 	{
 		frame.getContentPane().removeAll();
 		frame.setTitle("Default Character Creation Page - Modify this if Visible");
 		frame.setSize(560,670);
-		
+	}
+	
+	/**
+	 * Preps Navigation bar at bottom for Character Creation Pages
+	 */
+	public void setupNavP()
+	{
+
 		back = new JButton("Back");
 		cont = new JButton("Continue");
 		navP = new JPanel();
@@ -56,16 +61,27 @@ public class CCP {
 		navP.add(back, BorderLayout.LINE_START);
 		navP.add(spacer, BorderLayout.CENTER);
 		navP.add(cont, BorderLayout.LINE_END);
-		
+	}
+	
+	/**
+	 * Preps the main Layout for Character Creation Pages
+	 */
+	public void setupMainL()
+	{
 		//main layout 
 		displayP = new JPanel();
 		mainL = new BorderLayout();
 		displayP.setLayout(mainL);
 		displayP.add(navP, BorderLayout.SOUTH);
 		
+	}
+	
+	/**
+	 * Finishes the frame setup for character creation pages
+	 */
+	public void setupFinalize()
+	{
 		frame.add(displayP);
-		
-		
 		
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setVisible(true);

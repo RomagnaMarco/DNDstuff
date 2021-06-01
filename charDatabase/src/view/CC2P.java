@@ -28,7 +28,10 @@ public class CC2P extends CCP{
 	public CC2P(JFrame frame) 
 	{
 		super(frame);
-		setup();
+		setupFrame();
+		setupNavP();
+		setupMainL();
+		setupFinalize();
 		frame.setTitle("Character Creation - Phase 2");
 	}
 	
