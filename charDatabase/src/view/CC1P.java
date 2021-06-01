@@ -26,7 +26,7 @@ public class CC1P extends CCP{
 	
 	/**
 	 * Borrows from CCP template.
-	 * @param frame
+	 * @param frame re-used from old frames
 	 */
 	public CC1P(JFrame frame) 
 	{
@@ -40,13 +40,21 @@ public class CC1P extends CCP{
 		displayP = super.getDisplayP(); //initialize
 		
 		JButton setRoll = new JButton("Roll Sets");
-		setRoll.setPreferredSize(new Dimension(120, 40));
-		JPanel centerP = new JPanel();
+		JButton manSelect = new JButton("Enter Manually");
+		JButton pointBuy = new JButton("Point Buy");
+		setRoll.setPreferredSize(new Dimension(40, 60));
+		manSelect.setPreferredSize(new Dimension(40, 60));
+		JPanel topP = new JPanel();
 		GridLayout buttonTop = new GridLayout();
-		centerP.setLayout(buttonTop);
-		centerP.add(setRoll);
+		//set gaps between buttons for spacing
+		buttonTop.setHgap(15);
+		//add components to top Panel
+		topP.setLayout(buttonTop);
+		topP.add(setRoll);
+		topP.add(pointBuy);
+		topP.add(manSelect);
 		
-		displayP.add(centerP, BorderLayout.CENTER);
+		displayP.add(topP, BorderLayout.NORTH);
 		
 		setupFinalize();
 		
