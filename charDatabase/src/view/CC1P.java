@@ -2,10 +2,12 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -39,6 +41,7 @@ public class CC1P extends CCP{
 		//Center section dealt with.
 		displayP = super.getDisplayP(); //initialize
 		
+		//Top portion
 		JButton setRoll = new JButton("Roll Sets");
 		JButton manSelect = new JButton("Enter Manually");
 		JButton pointBuy = new JButton("Point Buy");
@@ -54,7 +57,39 @@ public class CC1P extends CCP{
 		topP.add(pointBuy);
 		topP.add(manSelect);
 		
+		//center portion
+		
+		JPanel centerP = new JPanel();
+		GridLayout cL = new GridLayout(6, 1); //center layout
+		centerP.setLayout(cL);
+		
+		//pointBuy section
+		
+		int bc = 6; //button count
+		JPanel[] rowArr = new JPanel[bc];
+		GridLayout[] layoutArr = new GridLayout[bc];
+		JButton[] plusArr = new JButton[bc];
+		JButton[] minusArr = new JButton[bc];
+		JLabel[] labelArr = new JLabel[bc];
+		for(int i = 0; i < bc; i++)
+		{
+			rowArr[i] = new JPanel();
+			layoutArr[i] = new GridLayout();
+			rowArr[i].setLayout(layoutArr[i]);
+			plusArr[i] = new JButton("+");
+			minusArr[i] = new JButton("-");
+			labelArr[i] = new JLabel("8");
+			labelArr[i].setFont(labelArr[i].getFont().deriveFont(Font.BOLD, 14f));
+			labelArr[i].setHorizontalAlignment(JLabel.CENTER);
+			rowArr[i].add(plusArr[i]);
+			rowArr[i].add(minusArr[i]);
+			rowArr[i].add(labelArr[i]);
+			centerP.add(rowArr[i]);
+		}
+		
+		
 		displayP.add(topP, BorderLayout.NORTH);
+		displayP.add(centerP, BorderLayout.CENTER);
 		
 		setupFinalize();
 		
