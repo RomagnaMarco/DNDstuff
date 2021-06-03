@@ -60,33 +60,81 @@ public class CC1P extends CCP{
 		//center portion
 		
 		JPanel centerP = new JPanel();
-		GridLayout cL = new GridLayout(6, 1); //center layout
+		GridLayout cL = new GridLayout(9,3); //center layout
 		centerP.setLayout(cL);
+		cL.setColumns(1);
 		
 		//pointBuy section
 		
 		int bc = 6; //button count
-		JPanel[] rowArr = new JPanel[bc];
-		GridLayout[] layoutArr = new GridLayout[bc];
+		int rc = bc +2; //row count
+		JPanel[] rowArr = new JPanel[rc]; //2 rows more than buttons
+		GridLayout[] layoutArr = new GridLayout[rc];//2 more layouts than buttons
 		JButton[] plusArr = new JButton[bc];
 		JButton[] minusArr = new JButton[bc];
-		JLabel[] labelArr = new JLabel[bc];
-		for(int i = 0; i < bc; i++)
+		JLabel[] statCurrArr = new JLabel[bc];
+		JLabel[] statCostArr = new JLabel[bc];
+		for(int i = 0; i < rc; i++) //adds rows of Jpanels that contain the PointBuy UI for each stat. 
 		{
-			rowArr[i] = new JPanel();
-			layoutArr[i] = new GridLayout();
-			rowArr[i].setLayout(layoutArr[i]);
-			plusArr[i] = new JButton("+");
-			minusArr[i] = new JButton("-");
-			labelArr[i] = new JLabel("8");
-			labelArr[i].setFont(labelArr[i].getFont().deriveFont(Font.BOLD, 14f));
-			labelArr[i].setHorizontalAlignment(JLabel.CENTER);
-			rowArr[i].add(plusArr[i]);
-			rowArr[i].add(minusArr[i]);
-			rowArr[i].add(labelArr[i]);
-			centerP.add(rowArr[i]);
+			
+			if(i == 0) //first row
+			{
+				rowArr[i] = new JPanel();
+				layoutArr[i] = new GridLayout();
+				rowArr[i].setLayout(layoutArr[i]);
+				JButton clickmeB = new JButton("Test"); //test code
+				rowArr[i].add(clickmeB);
+				JButton clickme2B = new JButton("Test"); //test code
+				rowArr[i].add(clickme2B);
+				centerP.add(rowArr[i]);
+			}
+			if (i != 0 && i != rc-1) //middle 6 rows
+			{
+				int ai = i - 1; //adjust index.
+				//use ai for 
+				//plusArr, minusArr, statCurrArr, statCostArr
+				
+				rowArr[i] = new JPanel();
+				layoutArr[i] = new GridLayout();
+				rowArr[i].setLayout(layoutArr[i]);
+				
+				//create buttons
+				plusArr[ai] = new JButton("+");
+				minusArr[ai] = new JButton("-");
+				statCurrArr[ai] = new JLabel("8");
+				statCostArr[ai] = new JLabel("0");
+				
+				//adjust text on labels. Bold and centered
+				statCurrArr[ai].setFont(statCurrArr[ai].getFont().deriveFont(Font.BOLD, 14f));
+				statCostArr[ai].setFont(statCostArr[ai].getFont().deriveFont(Font.BOLD, 14f));
+				statCurrArr[ai].setHorizontalAlignment(JLabel.CENTER);
+				statCostArr[ai].setHorizontalAlignment(JLabel.CENTER);
+				
+				//add components to row
+				rowArr[i].add(plusArr[ai]);
+				rowArr[i].add(minusArr[ai]);
+				rowArr[i].add(statCurrArr[ai]);
+				rowArr[i].add(statCostArr[ai]);
+				
+				//add rows to center panel
+				centerP.add(rowArr[i]);
+				
+				
+			}
+			if(i == bc+1) //first row
+			{
+				rowArr[i] = new JPanel();
+				layoutArr[i] = new GridLayout();
+				rowArr[i].setLayout(layoutArr[i]);
+				
+				JButton clickme3B = new JButton("Test"); //test code
+				rowArr[i].add(clickme3B);
+				JButton clickme4B = new JButton("Test"); //test code
+				rowArr[i].add(clickme4B);
+				centerP.add(rowArr[i]);
+			}
+			
 		}
-		
 		
 		displayP.add(topP, BorderLayout.NORTH);
 		displayP.add(centerP, BorderLayout.CENTER);
