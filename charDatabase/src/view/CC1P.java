@@ -100,8 +100,8 @@ public class CC1P extends CCP{
 				subtractLabel.setHorizontalAlignment(JLabel.CENTER);
 				
 				rowArr[i].add(ScoreLabel);
-				rowArr[i].add(addLabel);
 				rowArr[i].add(subtractLabel);
+				rowArr[i].add(addLabel);
 				rowArr[i].add(currScoreLabel);
 				rowArr[i].add(pointsAllocated);
 				
@@ -118,8 +118,8 @@ public class CC1P extends CCP{
 				rowArr[i].setLayout(layoutArr[i]);
 				
 				//create buttons
-				plusArr[ai] = new JButton("+");
-				minusArr[ai] = new JButton("-");
+				plusArr[ai] = new JButton("-");
+				minusArr[ai] = new JButton("+");
 				statCurrArr[ai] = new JLabel("8");
 				statCostArr[ai] = new JLabel("0");
 				
