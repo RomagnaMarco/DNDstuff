@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -70,6 +72,7 @@ public class CC1P extends CCP{
 		int bc = 6; //button count
 		int rc = bc +2; //row count
 		JLabel pointsLeft; 
+		Integer[] dropArr = {24, 26, 28, 30 , 32, 34, 36, 38, 40, 42};
 		JPanel[] rowArr = new JPanel[rc]; //2 rows more than buttons
 		GridLayout[] layoutArr = new GridLayout[rc];//2 more layouts than buttons
 		JButton[] plusArr = new JButton[bc];
@@ -83,6 +86,7 @@ public class CC1P extends CCP{
 			
 			if(i == 0) //first row
 			{
+				//main Panels
 				rowArr[i] = new JPanel();
 				layoutArr[i] = new GridLayout();
 				rowArr[i].setLayout(layoutArr[i]);
@@ -91,9 +95,21 @@ public class CC1P extends CCP{
 				JLabel addLabel = new JLabel("Add Points");
 				JLabel subtractLabel = new JLabel("Subtract Points");
 				JLabel currScoreLabel = new JLabel("Current Scores");
-				JTextArea pointsAllocated = new JTextArea();
 				
-				//center labels
+				
+				//sub panel
+				JPanel subPointPanel = new JPanel();
+				GridLayout subPointLay = new GridLayout(2,1);
+				subPointPanel.setLayout(subPointLay);
+				
+				JLabel descriptionLabel = new JLabel("Point Selection");
+				JComboBox<Integer> pointDropDown = new JComboBox(dropArr);
+				pointDropDown.setEditable(false);
+				subPointPanel.add(descriptionLabel);
+				subPointPanel.add(pointDropDown);
+				
+				//center all labels
+				descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
 				ScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 				currScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 				addLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -103,7 +119,7 @@ public class CC1P extends CCP{
 				rowArr[i].add(subtractLabel);
 				rowArr[i].add(addLabel);
 				rowArr[i].add(currScoreLabel);
-				rowArr[i].add(pointsAllocated);
+				rowArr[i].add(subPointPanel);
 				
 				centerP.add(rowArr[i]);
 			}
