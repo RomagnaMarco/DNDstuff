@@ -72,7 +72,7 @@ public class CC1P extends CCP{
 		int bc = 6; //button count
 		int rc = bc +2; //row count
 		JLabel pointsLeft; 
-		Integer[] dropArr = {24, 26, 28, 30 , 32, 34, 36, 38, 40, 42};
+		Integer[] dropArr = {24, 26, 28, 30 , 32, 34, 36, 38, 40};
 		JPanel[] rowArr = new JPanel[rc]; //2 rows more than buttons
 		GridLayout[] layoutArr = new GridLayout[rc];//2 more layouts than buttons
 		JButton[] plusArr = new JButton[bc];
@@ -91,7 +91,7 @@ public class CC1P extends CCP{
 				layoutArr[i] = new GridLayout();
 				rowArr[i].setLayout(layoutArr[i]);
 				
-				JLabel ScoreLabel = new JLabel("Ability Scores");
+				JLabel scoreLabel = new JLabel("Ability Scores");
 				JLabel addLabel = new JLabel("Add Points");
 				JLabel subtractLabel = new JLabel("Subtract Points");
 				JLabel currScoreLabel = new JLabel("Current Scores");
@@ -103,19 +103,19 @@ public class CC1P extends CCP{
 				subPointPanel.setLayout(subPointLay);
 				
 				JLabel descriptionLabel = new JLabel("Point Selection");
-				JComboBox<Integer> pointDropDown = new JComboBox(dropArr);
+				JComboBox<Integer> pointDropDown = new JComboBox<Integer>(dropArr);
 				pointDropDown.setEditable(false);
 				subPointPanel.add(descriptionLabel);
 				subPointPanel.add(pointDropDown);
 				
 				//center all labels
 				descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
-				ScoreLabel.setHorizontalAlignment(JLabel.CENTER);
+				scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 				currScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 				addLabel.setHorizontalAlignment(JLabel.CENTER);
 				subtractLabel.setHorizontalAlignment(JLabel.CENTER);
 				
-				rowArr[i].add(ScoreLabel);
+				rowArr[i].add(scoreLabel);
 				rowArr[i].add(subtractLabel);
 				rowArr[i].add(addLabel);
 				rowArr[i].add(currScoreLabel);
@@ -139,7 +139,9 @@ public class CC1P extends CCP{
 				statCurrArr[ai] = new JLabel("8");
 				statCostArr[ai] = new JLabel("0");
 				
-				//adjust text on labels. Bold and centered
+				//adjust text on labels and buttons. Bold and centered
+				plusArr[ai].setFont(plusArr[ai].getFont().deriveFont(Font.BOLD, 20f));
+				minusArr[ai].setFont(plusArr[ai].getFont().deriveFont(Font.BOLD, 20f));
 				statCurrArr[ai].setFont(statCurrArr[ai].getFont().deriveFont(Font.BOLD, 14f));
 				statCostArr[ai].setFont(statCostArr[ai].getFont().deriveFont(Font.BOLD, 14f));
 				statCurrArr[ai].setHorizontalAlignment(JLabel.CENTER);
@@ -148,6 +150,7 @@ public class CC1P extends CCP{
 				//handle label
 				ScoreLabelArr[ai] = new JLabel("");
 				ScoreLabelArr[ai].setText(abScoresArr[ai]);
+				ScoreLabelArr[ai].setFont(ScoreLabelArr[ai].getFont().deriveFont(Font.BOLD, 28f));
 				ScoreLabelArr[ai].setHorizontalAlignment(JLabel.CENTER);
 				
 				//add components to row
@@ -183,7 +186,6 @@ public class CC1P extends CCP{
 				rowArr[i].add(s3);
 				rowArr[i].add(s4);
 				rowArr[i].add(pointsLeft);
-				
 				
 				centerP.add(rowArr[i]);
 			}
