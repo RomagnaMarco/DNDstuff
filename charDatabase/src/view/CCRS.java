@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * Page 1 of Character Creation.
+ * Page 0 of Character Creation. Roll Sets Option
  * Works off of CCP class extension
  * Part of View in MVC arch
  * @author Marco
  *
  */
-public class CC1P extends CCP{
+public class CCRS extends CCP{
 	JButton back;
 	JButton cont;
 	JPanel spacer;
@@ -25,14 +25,14 @@ public class CC1P extends CCP{
 	 * Borrows from CCP template.
 	 * @param frame
 	 */
-	public CC1P(JFrame frame) 
+	public CCRS(JFrame frame) 
 	{
 		super(frame);
 		setupFrame();
 		setupNavP();
 		setupMainL();
 		setupFinalize();
-		frame.setTitle("Character Creation - Phase 1");
+		frame.setTitle("Character Creation - Phase 0");
 	}
 	
 

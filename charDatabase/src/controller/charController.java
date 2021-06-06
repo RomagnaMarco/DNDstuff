@@ -37,9 +37,17 @@ public class charController {
 		JFrame frame = new JFrame();
 		MMP menu = new MMP(frame);
 		GoDiceRollerL d = new GoDiceRollerL(menu);
-		GoCC1L cc1 = new GoCC1L(menu);
+		GoCCBP ccBP = new GoCCBP(menu);
+		GoCCRS ccRS = new GoCCRS(menu);
+		GoCCMS ccMS = new GoCCMS(menu);
 		menu.addDiceListener(d);
-		menu.addCCListener(cc1);
+		menu.addPBListener(ccBP);
+		menu.addSRListener(ccRS);
+		menu.addMSListener(ccMS);
+		menu.addDiceListener(d);
+		menu.addPBListener(ccBP);
+		menu.addSRListener(ccBP);
+		menu.addMSListener(ccBP);
 		
 		
 	}
@@ -91,7 +99,9 @@ public class charController {
 		MMP menu;
 		GoDiceRollerL d;
 		
-		GoCC1L cc1;
+		GoCCBP ccBP;
+		GoCCMS ccMS;
+		GoCCRS ccRS;
 		public GoMMPL(JFrame frame)
 		{
 			this.frame = frame;
@@ -100,9 +110,97 @@ public class charController {
 		public void actionPerformed(ActionEvent e) {
 			menu = new MMP(frame);
 			d = new GoDiceRollerL(menu);
-			cc1 = new GoCC1L(menu);
+			ccBP = new GoCCBP(menu);
+			ccRS = new GoCCRS(menu);
+			ccMS = new GoCCMS(menu);
 			menu.addDiceListener(d);
-			menu.addCCListener(cc1);
+			menu.addPBListener(ccBP);
+			menu.addSRListener(ccRS);
+			menu.addMSListener(ccMS);
+
+		}
+		
+	}
+	
+	
+	/**
+	 * Sends to CCBP (character creation phase 0 page = point Buy)
+	 * @author Marco
+	 *
+	 */
+	static class GoCCBP implements ActionListener
+	{
+		CCPB ccBP;
+		MMP menu;
+		GoMMPL b;
+		GoCC1L c;
+		public GoCCBP(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			ccBP = new CCPB(menu.frame);
+			b = new GoMMPL(menu.frame);
+			c = new GoCC1L(menu);
+			ccBP.addBackListener(b);
+			ccBP.addContListener(c);
+			
+		}
+		
+	}
+	
+	/**
+	 * Sends to CCMS (character creation phase 0 page = manual Select)
+	 * @author Marco
+	 *
+	 */
+	static class GoCCMS implements ActionListener
+	{
+		CCMS ccMS;
+		MMP menu;
+		GoMMPL b;
+		GoCC1L c;
+		public GoCCMS(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			ccMS = new CCMS(menu.frame);
+			b = new GoMMPL(menu.frame);
+			c = new GoCC1L(menu);
+			ccMS.addBackListener(b);
+			ccMS.addContListener(c);
+			
+		}
+		
+	}
+	
+	
+	/**
+	 * Sends to CCBP (character creation phase 0 page = point Buy)
+	 * @author Marco
+	 *
+	 */
+	static class GoCCRS implements ActionListener
+	{
+		CCRS ccRS;
+		MMP menu;
+		GoMMPL b;
+		GoCC1L c;
+		public GoCCRS(MMP menu)
+		{
+			this.menu = menu;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			ccRS = new CCRS(menu.frame);
+			b = new GoMMPL(menu.frame);
+			c = new GoCC1L(menu);
+			ccRS.addBackListener(b);
+			ccRS.addContListener(c);
+			
 		}
 		
 	}
@@ -113,11 +211,11 @@ public class charController {
 	 * @author Marco
 	 *
 	 */
-	static class GoCC1L implements ActionListener
+	static public class GoCC1L implements ActionListener
 	{
 		CC1P cc1;
 		MMP menu;
-		GoMMPL b;
+		GoCCBP b;
 		GoCC2L c;
 		public GoCC1L(MMP menu)
 		{
@@ -126,60 +224,32 @@ public class charController {
 		
 		public void actionPerformed(ActionEvent e) {
 			cc1 = new CC1P(menu.frame);
-			b = new GoMMPL(menu.frame);
+			b = new GoCCBP(menu);
 			c = new GoCC2L(menu);
 			cc1.addBackListener(b);
 			cc1.addContListener(c);
-			
 		}
 		
 	}
 	
-	
 	/**
-	 * Sends to CC2P (character creation phase 2 page)
+	 * Sends to CC1P (character creation phase 2 page)
 	 * @author Marco
 	 *
 	 */
 	static public class GoCC2L implements ActionListener
 	{
-		CC2P cc2;
+		CC2P cc3;
 		MMP menu;
 		GoCC1L b;
-		GoCC3L c;
 		public GoCC2L(MMP menu)
 		{
 			this.menu = menu;
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			cc2 = new CC2P(menu.frame);
+			cc3 = new CC2P(menu.frame);
 			b = new GoCC1L(menu);
-			c = new GoCC3L(menu);
-			cc2.addBackListener(b);
-			cc2.addContListener(c);
-		}
-		
-	}
-	
-	/**
-	 * Sends to CC2P (character creation phase 2 page)
-	 * @author Marco
-	 *
-	 */
-	static public class GoCC3L implements ActionListener
-	{
-		CC3P cc3;
-		MMP menu;
-		GoCC2L b;
-		public GoCC3L(MMP menu)
-		{
-			this.menu = menu;
-		}
-		
-		public void actionPerformed(ActionEvent e) {
-			cc3 = new CC3P(menu.frame);
-			b = new GoCC2L(menu);
 			cc3.addBackListener(b);
 		}
 		

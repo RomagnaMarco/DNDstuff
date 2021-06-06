@@ -25,10 +25,13 @@ import javax.swing.border.LineBorder;
  */
 public class MMP {
 	private JButton viewB; //view character button
-	private JButton ccB; //create character button
 	private JButton diceB; //dice page button
 	public  JFrame frame;
 	public Boolean popBool; //is DRP up or not.
+	public JPanel ccP; //panel for char creation
+	private JButton setRollB; //takes to char creation with set method
+	private JButton manSelectB; //takes to char creation with manual selection method
+	private JButton pointBuyB; //takes to char creation with point buy method.
 	
 	
 	/**
@@ -43,29 +46,39 @@ public class MMP {
 		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		
-		viewB = new JButton("View Characters");
-		ccB = new JButton("Create Character");
-		diceB = new JButton("Open Dice Roller");
-		
 		frame.setTitle("Main Menu");
-		frame.setSize(560,670);
+		frame.setSize(580,670);
 		
+		//setup view Button
+		viewB = new JButton("View Characters");
 		JPanel viewBP = new JPanel();
-		viewBP.setSize(455,700);
 		frame.add(viewBP, BorderLayout.NORTH);
 		//view button config
 		basicButtonSetup(viewB);
 		viewBP.add(viewB);
 		
-		JPanel ccBP = new JPanel();
-		ccBP.setSize(455,700);
-		frame.add(ccBP, BorderLayout.CENTER);
-		//create character button config
-		basicButtonSetup(ccB);
-		ccBP.add(ccB);
+		//char creation panel setup
+		ccP = new JPanel();
+		setRollB = new JButton("Roll Sets");
+		manSelectB = new JButton("Enter Manually");
+		pointBuyB = new JButton("Point Buy");
+		//Char Creation buttons config
+		basicButtonSetup(setRollB);
+		basicButtonSetup(manSelectB);
+		basicButtonSetup(pointBuyB);
+		GridLayout ccLay = new GridLayout();
+		ccP.setLayout(ccLay);
+		//set gaps between buttons for spacing
+		ccLay.setHgap(15);
+		//add components to ccP
+		ccP.add(setRollB);
+		ccP.add(pointBuyB);
+		ccP.add(manSelectB);		
+		frame.add(ccP, BorderLayout.CENTER);
 		
+		//setup dice button
+		diceB = new JButton("Open Dice Roller");
 		JPanel diceBP = new JPanel();
-		ccBP.setSize(455,700);
 		frame.add(diceBP, BorderLayout.SOUTH);
 		//Dice Roller button config
 		basicButtonSetup(diceB);
@@ -91,12 +104,32 @@ public class MMP {
 	}
 	
 	/**
-	 * actionlistener will work for this Create Characters button
-	 * @param listenCreate
+	 * actionlistener will work for this pointBuy button
+	 * @param listenCreateBP
 	 */
-	public void addCCListener(ActionListener listenCreate)
+	public void addPBListener(ActionListener listenCreateBP)
 	{
-		ccB.addActionListener(listenCreate);
+		pointBuyB.addActionListener(listenCreateBP);
+	
+	}
+	
+	/**
+	 * actionlistener will work for this manual Select button
+	 * @param listenCreateMS
+	 */
+	public void addMSListener(ActionListener listenCreateMS)
+	{
+		manSelectB.addActionListener(listenCreateMS);
+	
+	}
+	
+	/**
+	 * actionlistener will work for this setRoll button
+	 * @param listenCreateSR
+	 */
+	public void addSRListener(ActionListener listenCreateSR)
+	{
+		setRollB.addActionListener(listenCreateSR);
 	
 	}
 	
@@ -127,12 +160,12 @@ public class MMP {
 	 */
 	public void basicButtonSetup(JButton b)
 	{
-		b.setPreferredSize(new Dimension(400, 200));
+		b.setPreferredSize(new Dimension(300, 250));
 		b.setOpaque(true);
 		b.setBackground(new Color(41, 142, 208));
 		b.setForeground(Color.white);
 		b.setBorderPainted(false);
-		b.setFont(new Font("Arial", Font.BOLD, 40));
+		b.setFont(new Font("Arial", Font.BOLD, 20));
 	}
 	
 	

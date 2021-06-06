@@ -42,7 +42,7 @@ public class CCP {
 	{
 		frame.getContentPane().removeAll();
 		frame.setTitle("Default Character Creation Page - Modify this if Visible");
-		frame.setSize(560,670);
+		frame.setSize(580,670);
 	}
 	
 	/**
