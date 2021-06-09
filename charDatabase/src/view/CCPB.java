@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  * Page 0 of Character Creation. Point Buy Option
@@ -21,6 +19,7 @@ import javax.swing.JTextArea;
  *
  */
 public class CCPB extends CCP{
+	//super variables
 	JButton back;
 	JButton cont;
 	JPanel spacer;
@@ -28,6 +27,30 @@ public class CCPB extends CCP{
 	JPanel displayP;
 	BorderLayout mainL;
 	JFrame frame;
+	//CCPB variables
+	Integer[] dropArr = {24, 26, 28, 30 , 32, 34, 36, 38, 40};
+	JButton confirmB;
+	JLabel introL;
+	JComboBox<Integer> pointDropDown;
+	
+	JPanel topP;
+	BorderLayout topLay;
+	
+	JPanel subTopP;
+	BorderLayout subTopLay;
+	
+	JPanel centerP;
+	GridLayout cL;
+	
+	JLabel pointsLeft; 
+	JPanel[] rowArr;
+	GridLayout[] layoutArr;
+	JButton[] plusArr;
+	JButton[] minusArr;
+	JLabel[] statCurrArr;
+	JLabel[] statCostArr;
+	JLabel[] ScoreLabelArr;
+	String[] abScoresArr = {"STR", "DEX", "CON", "INT", "WIS", "CHA"};
 	
 	/**
 	 * Borrows from CCP template.
@@ -41,38 +64,52 @@ public class CCPB extends CCP{
 		
 		setupNavP();
 		setupMainL();
-		//Center section dealt with.
+		
+		
+	
 		displayP = super.getDisplayP(); //initialize
 		
 		//Top portion
-		JPanel topP = new JPanel();
-		GridLayout buttonTop = new GridLayout();
-		//set gaps between buttons for spacing
-		buttonTop.setHgap(15);
-		//add components to top Panel
-		topP.setLayout(buttonTop);
+		topP = new JPanel();
+		topLay = new BorderLayout();
+		topP.setLayout(topLay);
 		
+		//setup
+		introL = new JLabel(" Choose the # of points for your Character. Then hit Confirm.");
+		confirmB = new JButton("Confirm");
+		pointDropDown = new JComboBox<Integer>(dropArr);
+		pointDropDown.setEditable(false);
+		introL.setPreferredSize(new Dimension(100, 40));
+		confirmB.setPreferredSize(new Dimension(100, 30));
+		pointDropDown.setPreferredSize(new Dimension(60, 30));
+		
+		//top sub panel
+		subTopP = new JPanel();
+		subTopLay = new BorderLayout();
+		subTopP.setLayout(subTopLay);
+		subTopP.add(pointDropDown, BorderLayout.CENTER);
+		subTopP.add(confirmB, BorderLayout.EAST);
+		
+		topP.add(introL, BorderLayout.NORTH);
+		topP.add(subTopP, BorderLayout.EAST);
 		//center portion
 		
-		JPanel centerP = new JPanel();
-		GridLayout cL = new GridLayout(8,3); //center layout
+		centerP = new JPanel();
+		cL = new GridLayout(8,3); //center layout
 		centerP.setLayout(cL);
 		cL.setColumns(1);
 		
-		//pointBuy section
+		//pointBuy main section
 		
 		int bc = 6; //button count
 		int rc = bc +2; //row count
-		JLabel pointsLeft; 
-		Integer[] dropArr = {24, 26, 28, 30 , 32, 34, 36, 38, 40};
-		JPanel[] rowArr = new JPanel[rc]; //2 rows more than buttons
-		GridLayout[] layoutArr = new GridLayout[rc];//2 more layouts than buttons
-		JButton[] plusArr = new JButton[bc];
-		JButton[] minusArr = new JButton[bc];
-		JLabel[] statCurrArr = new JLabel[bc];
-		JLabel[] statCostArr = new JLabel[bc];
-		JLabel[] ScoreLabelArr = new JLabel[bc];
-		String[] abScoresArr = {"STR", "DEX", "CON", "INT", "WIS", "CHA"};
+		rowArr = new JPanel[rc]; //2 rows more than buttons
+		layoutArr = new GridLayout[rc];//2 more layouts than buttons
+		plusArr = new JButton[bc];
+		minusArr = new JButton[bc];
+		statCurrArr = new JLabel[bc];
+		statCostArr = new JLabel[bc];
+		ScoreLabelArr = new JLabel[bc];
 		for(int i = 0; i < rc; i++) //adds rows of Jpanels that contain the PointBuy UI for each stat. 
 		{
 			
@@ -87,18 +124,7 @@ public class CCPB extends CCP{
 				JLabel addLabel = new JLabel("Add Points");
 				JLabel subtractLabel = new JLabel("Subtract Points");
 				JLabel currScoreLabel = new JLabel("Current Scores");
-				
-				
-				//sub panel
-				JPanel subPointPanel = new JPanel();
-				GridLayout subPointLay = new GridLayout(2,1);
-				subPointPanel.setLayout(subPointLay);
-				
-				JLabel descriptionLabel = new JLabel("Point Selection");
-				JComboBox<Integer> pointDropDown = new JComboBox<Integer>(dropArr);
-				pointDropDown.setEditable(false);
-				subPointPanel.add(descriptionLabel);
-				subPointPanel.add(pointDropDown);
+				JLabel descriptionLabel = new JLabel("Points Allocated");
 				
 				//center all labels
 				descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -111,7 +137,7 @@ public class CCPB extends CCP{
 				rowArr[i].add(subtractLabel);
 				rowArr[i].add(addLabel);
 				rowArr[i].add(currScoreLabel);
-				rowArr[i].add(subPointPanel);
+				rowArr[i].add(descriptionLabel);
 				
 				centerP.add(rowArr[i]);
 			}
