@@ -195,7 +195,7 @@ public class CCPB extends CCP{
 				JLabel points = new JLabel("Points Left: "); //spacer
 				
 				//handle center alignment for label
-				pointsLeft = new JLabel("0");
+				pointsLeft = new JLabel("27");
 				pointsLeft.setHorizontalAlignment(JLabel.CENTER);
 				points.setHorizontalAlignment(JLabel.CENTER);
 				
