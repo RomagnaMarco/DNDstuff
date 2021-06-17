@@ -52,6 +52,46 @@ public class PointBuyPage {
 	}
 
 	/**
+	 * returns value of points needed for the value of the attribute given
+	 * @param attr being checked for how points are needed to modify
+	 * @return number of points needed to modify attributes
+	 */
+	public int getPointsNeeded(int attr)
+	{
+		int pN = 100;
+		if(attr == 8)
+		{
+			pN = 1;
+		}
+		else if (attr == 9)
+		{
+			pN = 2;
+		}
+		else if (attr == 10)
+		{
+			pN = 3;
+		}
+		else if (attr == 11)
+		{
+			pN = 4;
+		}
+		else if (attr == 12)
+		{
+			pN = 5;
+		}
+		else if (attr == 13)
+		{
+			pN = 7;
+		}
+		else if (attr == 14)
+		{
+			pN = 9;
+		}//anything else will result in pN being 2 high to afford
+		
+		return pN;
+	}
+	
+	/**
 	 * For PointBuy Page in Model. 
 	 * @return if can continue away from this page via button push
 	 */
@@ -100,6 +140,43 @@ public class PointBuyPage {
 		this.pointsLeft = pointsLeft;
 	}
 
+	public int getAttribute(String attrName)
+	{
+		int desiredValue = 100; //set to 100 be default.
+		if(attrName.equals("STR"))
+		{
+			desiredValue = getStr();
+		}
+		else if (attrName.equals("DEX"))
+		{
+			desiredValue = getDex();
+		}
+		else if (attrName.equals("CON"))
+		{
+			desiredValue = getCon();
+		}
+		else if (attrName.equals("INT"))
+		{
+			desiredValue = getInt();
+		}
+		else if (attrName.equals("WIS"))
+		{
+			desiredValue = getWis();
+		}
+		else if (attrName.equals("CHA"))
+		{
+			desiredValue = getCha();
+		}
+		else
+		{
+			System.out.println("An Error has occurred in the getAttribute() method. Check inputed String, it does not match the presets.");
+		}
+		if(desiredValue == 100)
+		{
+			System.out.println("desiredValue in method getAttribute() is still at default. In class PointBuyPage (part of model).");
+		}
+		return desiredValue;
+	}
 	
 	public int getStr() {
 		return Str;

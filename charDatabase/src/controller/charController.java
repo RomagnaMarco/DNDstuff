@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
+import model.PointBuyPage;
 import view.*;
 
 
@@ -134,6 +135,7 @@ public class charController {
 		MMP menu;
 		GoMMPL b;
 		GoCC1L c;
+		PointBuyPage PBP;
 		public GoCCBP(MMP menu)
 		{
 			this.menu = menu;
@@ -145,6 +147,10 @@ public class charController {
 			c = new GoCC1L(menu);
 			ccBP.addBackListener(b);
 			ccBP.addContListener(c);
+			
+			
+			PBP = new PointBuyPage();
+			
 			
 		}
 		
@@ -467,6 +473,71 @@ public class charController {
 		{
 			System.out.println(message);
 		}
+	}
+	
+	/**
+	 * Takes in row(attribute) and modifies the Ability Scores with points
+	 * If there is not enough points, the modification won't happen.
+	 * Changes will also reflect with the points left option.
+	 * By default, points are currently set at 27. (this may change)
+	 * @param attr The attribute value. Given string of name of attribute
+	 * @param PBP the model to grab info from.
+	 * @param positive to determine whether or not to add or subtract from the score
+	 */
+	public void ModifyScore(String attr, boolean positive, PointBuyPage PBP)
+	{
+		int pos = 1;
+		if (positive == false)
+		{
+			pos*= -1;
+		}
+		
+		if(checkScore(attr, positive, PBP) == true)
+		{
+			//finish this
+		}
+		else
+		{
+			//nothing happens. insufficient points
+		}
+	}
+	
+	/**
+	 * Checks if enough points to modify that attribute score for a given attribute
+	 * also checks if it doesn't go over  15 or under 8.
+	 * @param AbilityScore checks this ability score to see if there enough points. uses the name to later pull from the
+	 * score stored in the model.
+	 * @param positive determines whether or not your trying to subtract or add from the points
+	 * @return if able to modify this attribute
+	 */
+	public boolean checkScore(String attrName, boolean positive, PointBuyPage PBP)
+	{
+		boolean valid = true; //true by default
+		
+		int pL = PBP.getPointsLeft(); //points left
+		int attr = PBP.getAttribute(attrName); //gets integer value of ability score currently at
+		int pN = PBP.getPointsNeeded(attr); // points needed. 1000 for sake of initializing
+	
+		if (positive == true)
+		{
+			if(pN > pL) //cannot add when points needed exceed points left
+			{
+				valid = false;
+			}
+			if(attr == 15) //cannot add past 15
+			{
+				valid = false;
+			}
+		}
+		else
+		{
+			if(attr == 8) //cannot subtract past 8
+			{
+				valid = false;
+			}
+		}
+			
+		return valid;
 	}
 	
 }
