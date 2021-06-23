@@ -20,6 +20,7 @@ public class PointBuyPage {
 	private int WisPoint;
 	private int ChaPoint;
 	
+	
 	public PointBuyPage()
 	{
 
@@ -43,22 +44,25 @@ public class PointBuyPage {
 		Cha = 8;
 		
 		//points spent on each. Changes when their respective stat gets lowered or raised.
+		//aka pointsAllocated in CCPB
 		StrPoint = 0;
 		DexPoint = 0;
 		ConPoint = 0;
 		IntPoint = 0;
 		WisPoint = 0;
-		ChaPoint = 0; 
+		ChaPoint = 0;
+		
 	}
 
 	/**
 	 * returns value of points needed for the value of the attribute given
+	 * default value returned is 1000, for when a range problem occur
 	 * @param attr being checked for how points are needed to modify
 	 * @return number of points needed to modify attributes
 	 */
 	public int getPointsNeeded(int attr)
 	{
-		int pN = 100;
+		int pN = 1000;
 		if(attr == 8)
 		{
 			pN = 1;
@@ -140,6 +144,11 @@ public class PointBuyPage {
 		this.pointsLeft = pointsLeft;
 	}
 
+	/**
+	 * gets int value of attr based on Fixed String entered. must match accordingly
+	 * @param attrName name of Attribute. 3 letter abbreviation format in caps
+	 * @return
+	 */
 	public int getAttribute(String attrName)
 	{
 		int desiredValue = 100; //set to 100 be default.
@@ -176,6 +185,127 @@ public class PointBuyPage {
 			System.out.println("desiredValue in method getAttribute() is still at default. In class PointBuyPage (part of model).");
 		}
 		return desiredValue;
+	}
+	
+	/**
+	 * gets int value of attr's points allocated based on Fixed String entered. must match accordingly
+	 * @param attrName name of Attribute. 3 letter abbreviation format in caps
+	 * @return
+	 */
+	public int getAttributePoints(String attrName)
+	{
+		int desiredValue = 100; //set to 100 be default.
+		if(attrName.equals("STR"))
+		{
+			desiredValue = getStrPoint();
+		}
+		else if (attrName.equals("DEX"))
+		{
+			desiredValue = getDexPoint();
+		}
+		else if (attrName.equals("CON"))
+		{
+			desiredValue = getConPoint();
+		}
+		else if (attrName.equals("INT"))
+		{
+			desiredValue = getIntPoint();
+		}
+		else if (attrName.equals("WIS"))
+		{
+			desiredValue = getWisPoint();
+		}
+		else if (attrName.equals("CHA"))
+		{
+			desiredValue = getChaPoint();
+		}
+		else
+		{
+			System.out.println("An Error has occurred in the getAttributePoints() method. Check inputed String, it does not match the presets.");
+		}
+		if(desiredValue == 100)
+		{
+			System.out.println("desiredValue in method getAttributePoints() is still at default. In class PointBuyPage (part of model).");
+		}
+		return desiredValue;
+	}
+	
+	/**
+	 * takes in fixed String of Attribute's name and changes the respective attributes points allocated value in model
+	 * @param attrName name of attribute. 3 letter abbreviation format in caps
+	 * @param newValue value being set to for the attribute's points
+	 */
+	public void setAttributePoints(String attrName, int newValue)
+	{
+		
+		if(attrName.equals("STR"))
+		{
+			 setStrPoint(newValue);
+		}
+		else if (attrName.equals("DEX"))
+		{
+			setDexPoint(newValue);
+		}
+		else if (attrName.equals("CON"))
+		{
+			setConPoint(newValue);
+		}
+		else if (attrName.equals("INT"))
+		{
+			setIntPoint(newValue);
+		}
+		else if (attrName.equals("WIS"))
+		{
+			setWisPoint(newValue);
+		}
+		else if (attrName.equals("CHA"))
+		{
+			setChaPoint(newValue);
+		}
+		else
+		{
+			System.out.println("An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
+		}
+		
+	}
+	
+	/**
+	 * takes in fixed String of Attribute's name and changes the respective attribute value in the model
+	 * @param attrName name of attribute. 3 letter abbreviation format in caps
+	 * @param newValue value being set to for the attribute
+	 */
+	public void setAttribute(String attrName, int newValue)
+	{
+		
+		if(attrName.equals("STR"))
+		{
+			 setStr(newValue);
+		}
+		else if (attrName.equals("DEX"))
+		{
+			setDex(newValue);
+		}
+		else if (attrName.equals("CON"))
+		{
+			setCon(newValue);
+		}
+		else if (attrName.equals("INT"))
+		{
+			setInt(newValue);
+		}
+		else if (attrName.equals("WIS"))
+		{
+			setWis(newValue);
+		}
+		else if (attrName.equals("CHA"))
+		{
+			setCha(newValue);
+		}
+		else
+		{
+			System.out.println("An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
+		}
+		
 	}
 	
 	public int getStr() {

@@ -219,12 +219,81 @@ public class CCPB extends CCP{
 	}
 	
 	/**
-	 * basic getter method. how many points are left to spend. This number can change
-	 * @return num of points left to spend for pointbuy
+	 * Shows new pointsLeft in view to reflect the change also happening in the model
+	 * 
+	 * @param pointsLeftModel points left stored in the model
 	 */
-	public int getPointsLeft() //will need to be changed later. leaving this here for now.
+	public void modifyPointsLeft(int pointsLeftModel)
 	{
-		return Integer.parseInt(pointsLeft.getText()); //points left
+		String value = Integer.toString(pointsLeftModel);
+		pointsLeft.setText(value); //points left
 	}
 
+	/**
+	 * Modifies Attribute shown in view (up or down 1 value)
+	 * @param attrName name of Attribute to modify
+	 * @param modValue the value by which statsCurrArr[attrIndex] changes
+	 */
+	public void modifyAttribute(String attrName,Integer modValue)
+	{
+		int attrIndex = findArrIndexWithAttrAbbreviation(attrName);
+		String newValue = Integer.toString(modValue);
+		statCurrArr[attrIndex].setText(newValue);
+	}
+
+	/**
+	 * Modifies amount of pointsAllocated shown in view
+	 * @param attrName name of Attribute to modify
+	 * @param modValue the amount of points to change in statCostArr[attrIndex] by
+	 */
+	public void modifyPointsAllocated(String attrName, Integer modValue)
+	{
+		int attrIndex = findArrIndexWithAttrAbbreviation(attrName);
+		String newValue = Integer.toString(modValue);
+		statCostArr[attrIndex].setText(newValue);
+	}
+	
+	/**
+	 * Given an fixed String that represents the name of an attribute, spits out the index in the arrs in view
+	 * Usable on several Arrays in CCPB since the attributes of the arrays all align
+	 * @param attrName name of Attribute. 3 letter abbreviation format in caps
+	 */
+	public int findArrIndexWithAttrAbbreviation(String attrName)
+	{
+		int desiredIndex = 100; //purposely out of bounds by default
+		
+		if(attrName.equals("STR"))
+		{
+			desiredIndex = 0;
+		}
+		else if (attrName.equals("DEX"))
+		{
+			desiredIndex = 1;
+		}
+		else if (attrName.equals("CON"))
+		{
+			desiredIndex = 2;
+		}
+		else if (attrName.equals("INT"))
+		{
+			desiredIndex = 3;
+		}
+		else if (attrName.equals("WIS"))
+		{
+			desiredIndex = 4;
+		}
+		else if (attrName.equals("CHA"))
+		{
+			desiredIndex = 5;
+		}
+		else
+		{
+			System.out.println("An Error has occurred in the findArrIndexWithAttrAbbreviation() method. Check inputed String, it does not match the presets.");
+		}
+		if(desiredIndex == 100)
+		{
+			System.out.println("desiredIndex in method findArrIndexWithAttrAbbreviation() is still at default. In class CCPB (part of view).");
+		}
+		return desiredIndex;
+	}
 }

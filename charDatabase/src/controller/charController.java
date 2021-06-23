@@ -484,7 +484,7 @@ public class charController {
 	 * @param PBP the model to grab info from.
 	 * @param positive to determine whether or not to add or subtract from the score
 	 */
-	public void ModifyScore(String attr, boolean positive, PointBuyPage PBP)
+	public void ModifyScore(String attr, boolean positive, PointBuyPage PBP, CCPB view)
 	{
 		int pos = 1;
 		if (positive == false)
@@ -492,9 +492,39 @@ public class charController {
 			pos*= -1;
 		}
 		
-		if(checkScore(attr, positive, PBP) == true)
+		if(checkScore(attr, positive, PBP) == true) //sufficient points
 		{
-			//finish this
+			//retrieve values from model
+			int pointsNeeded = PBP.getPointsNeeded(PBP.getAttribute(attr));
+			pointsNeeded = pointsNeeded * pos; //account for subtracting or addition of points
+			int pointsLeft = PBP.getPointsLeft();
+			int allocated = PBP.getAttributePoints(attr);
+			int attrCurr = PBP.getAttribute(attr);
+			
+			//variables to make things easier
+			int newPointsLeft = pointsLeft-pointsNeeded;
+			int newAllocated = pointsNeeded + allocated;
+			int newAttr = attrCurr + pos; //this either adds or subtracts 1
+			
+			//modify pointsLeft in view
+			view.modifyPointsLeft(newPointsLeft);
+			
+			//modify pointsLeft in model
+			PBP.setPointsLeft(newPointsLeft);
+			
+			//manage points in view
+			view.modifyPointsAllocated(attr, newAllocated);
+			
+			//manage points in model
+			PBP.setAttributePoints(attr, newAllocated);
+			
+			//manage attribute in view
+			view.modifyAttribute(attr, newAttr);
+			
+			//manage attribute in model
+			PBP.setAttribute(attr, newAttr);
+			
+			
 		}
 		else
 		{
@@ -514,10 +544,12 @@ public class charController {
 	{
 		boolean valid = true; //true by default
 		
+		//grab from model
 		int pL = PBP.getPointsLeft(); //points left
 		int attr = PBP.getAttribute(attrName); //gets integer value of ability score currently at
 		int pN = PBP.getPointsNeeded(attr); // points needed. 1000 for sake of initializing
 	
+		//logic
 		if (positive == true)
 		{
 			if(pN > pL) //cannot add when points needed exceed points left
