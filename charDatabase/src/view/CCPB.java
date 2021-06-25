@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -295,5 +296,149 @@ public class CCPB extends CCP{
 			System.out.println("desiredIndex in method findArrIndexWithAttrAbbreviation() is still at default. In class CCPB (part of view).");
 		}
 		return desiredIndex;
+	}
+	
+	/**
+	 * getter for confirm Button in CCPB
+	 * @return
+	 */
+	public JButton getConfirmB()
+	{
+		return confirmB;
+	}
+	
+	/**
+	 * a getter for the plus buttons in CCPB
+	 * @return
+	 */
+	public JButton[] getPlusArr()
+	{
+		return plusArr;
+	}
+	
+	/**
+	 * a getter for the minus buttons in CCPB
+	 * @return
+	 */
+	public JButton[] getMinussArr()
+	{
+		return minusArr;
+	}
+	
+	/**
+	 * action listener will work for this plus STR button
+	 * @param listenPlusSTR
+	 */
+	public void addPlusSTRListener(ActionListener listenPlusSTR)
+	{
+		plusArr[0].addActionListener(listenPlusSTR);
+	}
+	
+	/**
+	 * action listener will work for this plus DEX button
+	 * @param listenPlusDEX
+	 */
+	public void addPlusDEXListener(ActionListener listenPlusDEX)
+	{
+		plusArr[1].addActionListener(listenPlusDEX);
+	}
+	
+	/**
+	 * action listener will work for this plus CON button
+	 * @param listenPlusCON
+	 */
+	public void addPlusCONListener(ActionListener listenPlusCON)
+	{
+		plusArr[2].addActionListener(listenPlusCON);
+	}
+	
+	/**
+	 * action listener will work for this plus INT button
+	 * @param listenPlusINT
+	 */
+	public void addPlusINTListener(ActionListener listenPlusINT)
+	{
+		plusArr[3].addActionListener(listenPlusINT);
+	}
+	
+	/**
+	 * action listener will work for this plus WIS button
+	 * @param listenPlusWIS
+	 */
+	public void addPlusWISListener(ActionListener listenPlusWIS)
+	{
+		plusArr[4].addActionListener(listenPlusWIS);
+	}
+	
+	/**
+	 * action listener will work for this plus CHA button
+	 * @param listenPlusCHA
+	 */
+	public void addPlusCHAListener(ActionListener listenPlusCHA)
+	{
+		plusArr[5].addActionListener(listenPlusCHA);
+	}
+	
+	/**
+	 * action listener will work for this Minus STR button
+	 * @param listenMinusSTR
+	 */
+	public void addMinusSTRListener(ActionListener listenMinusSTR)
+	{
+		minusArr[0].addActionListener(listenMinusSTR);
+	}
+	
+	/**
+	 * action listener will work for this Minus DEX button
+	 * @param listenMinusDEX
+	 */
+	public void addMinusDEXListener(ActionListener listenMinusDEX)
+	{
+		minusArr[1].addActionListener(listenMinusDEX);
+	}
+	
+	/**
+	 * action listener will work for this Minus CON button
+	 * @param listenMinusCON
+	 */
+	public void addMinusCONListener(ActionListener listenMinusCON)
+	{
+		minusArr[2].addActionListener(listenMinusCON);
+	}
+	
+	/**
+	 * action listener will work for this Minus INT button
+	 * @param listenMinusINT
+	 */
+	public void addMinusINTListener(ActionListener listenMinusINT)
+	{
+		minusArr[3].addActionListener(listenMinusINT);
+	}
+	
+	/**
+	 * action listener will work for this Minus WIS button
+	 * @param listenMinusWIS
+	 */
+	public void addMinusWISListener(ActionListener listenMinusWIS)
+	{
+		minusArr[4].addActionListener(listenMinusWIS);
+	}
+	
+	/**
+	 * action listener will work for this Minus CHA button
+	 * @param listenMinusCHA
+	 */
+	public void addMinusCHAListener(ActionListener listenMinusCHA)
+	{
+		minusArr[5].addActionListener(listenMinusCHA);
+	}
+	
+	/**
+	 * action listener will work for this confirm button
+	 * @param listenConfirm
+	 */
+	public void addConfirmListener(ActionListener listenConfirm)
+	{
+		confirmB.addActionListener(listenConfirm);
 	}
 }

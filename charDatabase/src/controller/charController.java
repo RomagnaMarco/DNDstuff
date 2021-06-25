@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -136,6 +137,7 @@ public class charController {
 		GoMMPL b;
 		GoCC1L c;
 		PointBuyPage PBP;
+		ManagePointBuyUI ui;
 		public GoCCBP(MMP menu)
 		{
 			this.menu = menu;
@@ -148,9 +150,23 @@ public class charController {
 			ccBP.addBackListener(b);
 			ccBP.addContListener(c);
 			
-			
 			PBP = new PointBuyPage();
+			ui = new ManagePointBuyUI(PBP, ccBP);
 			
+			/// all the plus and minus buttons. and the confirm button
+			ccBP.addConfirmListener(ui);
+			ccBP.addPlusSTRListener(ui);
+			ccBP.addMinusSTRListener(ui);
+			ccBP.addPlusDEXListener(ui);
+			ccBP.addMinusDEXListener(ui);
+			ccBP.addPlusCONListener(ui);
+			ccBP.addMinusCONListener(ui);
+			ccBP.addPlusINTListener(ui);
+			ccBP.addMinusINTListener(ui);
+			ccBP.addPlusWISListener(ui);
+			ccBP.addMinusWISListener(ui);
+			ccBP.addPlusCHAListener(ui);
+			ccBP.addMinusCHAListener(ui);
 			
 		}
 		
@@ -475,6 +491,89 @@ public class charController {
 		}
 	}
 	
+	static class ManagePointBuyUI implements ActionListener
+	{
+		PointBuyPage PBP;
+		CCPB view;
+		JButton[] plusArr;
+		JButton[] minusArr;
+		JButton confirmB;
+		public ManagePointBuyUI(PointBuyPage PBP, CCPB view)
+		{ 
+			this.PBP = PBP;
+			this.view = view;
+			plusArr = view.getPlusArr();
+			minusArr = view.getMinussArr();
+			confirmB = view.getConfirmB();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			
+			//checks which button is performing the action event
+			if(e.getSource() == confirmB)
+			{
+				
+			}
+			else if(e.getSource() == minusArr[0]) //STR minus
+			{
+				ModifyScore("STR", false, PBP, view);
+			}
+			else if(e.getSource() == minusArr[1]) //DEX minus
+			{
+				ModifyScore("DEX", false, PBP, view);
+			}
+			else if(e.getSource() == minusArr[2]) //CON minus
+			{
+				ModifyScore("CON", false, PBP, view);
+			}
+			else if(e.getSource() == minusArr[3]) //INT minus
+			{
+				ModifyScore("INT", false, PBP, view);
+			}
+			else if(e.getSource() == minusArr[4]) //WIS minus
+			{
+				ModifyScore("WIS", false, PBP, view);
+			}
+			else if(e.getSource() == minusArr[5]) //CHA minus
+			{
+				ModifyScore("CHA", false, PBP, view);
+			}
+			else if(e.getSource() == plusArr[0]) //STR plus
+			{
+				ModifyScore("STR", true, PBP, view);
+			}
+			else if(e.getSource() == plusArr[1]) //DEX plus
+			{
+				ModifyScore("DEX", true, PBP, view);
+			}
+			else if(e.getSource() == plusArr[2]) //CON plus
+			{
+				ModifyScore("CON", true, PBP, view);
+			}
+			else if(e.getSource() == plusArr[3]) //INT plus
+			{
+				ModifyScore("INT", true, PBP, view);
+			}
+			else if(e.getSource() == plusArr[4]) //WIS plus
+			{
+				ModifyScore("WIS", true, PBP, view);
+			}
+			else if(e.getSource() == plusArr[5]) //CHA plus
+			{
+				ModifyScore("CHA", true, PBP, view);
+			}
+			else
+			{
+				System.out.println("Something has gone wrong in charController.java in the "
+						+ "  ManagePointBuyUI static class during the actionPerformed Event");
+			}
+			
+		}
+		
+		
+	
+	}
+	
 	/**
 	 * Takes in row(attribute) and modifies the Ability Scores with points
 	 * If there is not enough points, the modification won't happen.
@@ -484,7 +583,7 @@ public class charController {
 	 * @param PBP the model to grab info from.
 	 * @param positive to determine whether or not to add or subtract from the score
 	 */
-	public void ModifyScore(String attr, boolean positive, PointBuyPage PBP, CCPB view)
+	public static void ModifyScore(String attr, boolean positive, PointBuyPage PBP, CCPB view)
 	{
 		int pos = 1;
 		if (positive == false)
@@ -540,7 +639,7 @@ public class charController {
 	 * @param positive determines whether or not your trying to subtract or add from the points
 	 * @return if able to modify this attribute
 	 */
-	public boolean checkScore(String attrName, boolean positive, PointBuyPage PBP)
+	public static boolean checkScore(String attrName, boolean positive, PointBuyPage PBP)
 	{
 		boolean valid = true; //true by default
 		
