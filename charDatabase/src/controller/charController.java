@@ -585,13 +585,14 @@ public class charController {
 	 */
 	public static void ModifyScore(String attr, boolean positive, PointBuyPage PBP, CCPB view)
 	{
+		int selectedItem = view.getSelectedPB();
 		int pos = 1;
 		if (positive == false)
 		{
 			pos*= -1;
 		}
 		
-		if(checkScore(attr, positive, PBP) == true) //sufficient points
+		if(checkScore(attr, positive, PBP, selectedItem) == true) //sufficient points
 		{
 			//retrieve values from model
 			int pointsNeeded = PBP.getPointsNeeded(PBP.getAttribute(attr));
@@ -639,7 +640,7 @@ public class charController {
 	 * @param positive determines whether or not your trying to subtract or add from the points
 	 * @return if able to modify this attribute
 	 */
-	public static boolean checkScore(String attrName, boolean positive, PointBuyPage PBP)
+	public static boolean checkScore(String attrName, boolean positive, PointBuyPage PBP, int SelectedItem)
 	{
 		boolean valid = true; //true by default
 		
@@ -663,6 +664,10 @@ public class charController {
 		else
 		{
 			if(attr == 8) //cannot subtract past 8
+			{
+				valid = false;
+			}
+			if(pN + pL > SelectedItem) //No getting more points somehow.
 			{
 				valid = false;
 			}

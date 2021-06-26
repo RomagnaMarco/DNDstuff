@@ -441,4 +441,15 @@ public class CCPB extends CCP{
 	{
 		confirmB.addActionListener(listenConfirm);
 	}
+	
+	/**
+	 * Gets the currently selected item on the dropdown box in CCPB
+	 * @return the integer of that selected item
+	 */
+	public int getSelectedPB()
+	{
+		int selected = (int)pointDropDown.getSelectedItem();
+		
+		return selected;
+	}
 }
