@@ -58,39 +58,34 @@ public class PointBuyPage {
 	 * returns value of points needed for the value of the attribute given
 	 * default value returned is 1000, for when a range problem occur
 	 * @param attr being checked for how points are needed to modify
+	 * @param positive needs to know if subtracting or adding
 	 * @return number of points needed to modify attributes
 	 */
-	public int getPointsNeeded(int attr)
+	public int getPointsNeeded(int attr, boolean positive)
 	{
 		int pN = 1000;
-		if(attr == 8)
+		if(positive == true) //adding up
 		{
-			pN = 1;
+			if(attr > 7 && attr < 14) // 9 to 13
+			{
+				pN = 1;
+			}
+			else //attr == 15 || attr == 14
+			{
+				pN = 2;
+			}
 		}
-		else if (attr == 9)
+		else //subtracting down
 		{
-			pN = 2;
+			if(attr > 7 && attr < 15) // 9 to 13
+			{
+				pN = 1;
+			}
+			else //attr == 15
+			{
+				pN = 2;
+			}	
 		}
-		else if (attr == 10)
-		{
-			pN = 3;
-		}
-		else if (attr == 11)
-		{
-			pN = 4;
-		}
-		else if (attr == 12)
-		{
-			pN = 5;
-		}
-		else if (attr == 13)
-		{
-			pN = 7;
-		}
-		else if (attr == 14)
-		{
-			pN = 9;
-		}//anything else will result in pN being 2 high to afford
 		
 		return pN;
 	}

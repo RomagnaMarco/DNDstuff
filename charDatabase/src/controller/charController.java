@@ -595,7 +595,7 @@ public class charController {
 		if(checkScore(attr, positive, PBP, selectedItem) == true) //sufficient points
 		{
 			//retrieve values from model
-			int pointsNeeded = PBP.getPointsNeeded(PBP.getAttribute(attr));
+			int pointsNeeded = PBP.getPointsNeeded(PBP.getAttribute(attr), positive);
 			pointsNeeded = pointsNeeded * pos; //account for subtracting or addition of points
 			int pointsLeft = PBP.getPointsLeft();
 			int allocated = PBP.getAttributePoints(attr);
@@ -634,7 +634,7 @@ public class charController {
 	
 	/**
 	 * Checks if enough points to modify that attribute score for a given attribute
-	 * also checks if it doesn't go over  15 or under 8.
+	 * also checks if it doesn't go over  16 or under 8.
 	 * @param AbilityScore checks this ability score to see if there enough points. uses the name to later pull from the
 	 * score stored in the model.
 	 * @param positive determines whether or not your trying to subtract or add from the points
@@ -647,16 +647,16 @@ public class charController {
 		//grab from model
 		int pL = PBP.getPointsLeft(); //points left
 		int attr = PBP.getAttribute(attrName); //gets integer value of ability score currently at
-		int pN = PBP.getPointsNeeded(attr); // points needed. 1000 for sake of initializing
+		int pN = PBP.getPointsNeeded(attr, positive); // points needed. 
 	
 		//logic
 		if (positive == true)
 		{
-			if(pN > pL) //cannot add when points needed exceed points left
+			if(pL- pN < 0) //cannot add when points it will result in less than 0 points left
 			{
 				valid = false;
 			}
-			if(attr == 15) //cannot add past 15
+			if(attr == 16) //cannot add past 16
 			{
 				valid = false;
 			}
