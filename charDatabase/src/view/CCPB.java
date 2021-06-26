@@ -452,4 +452,30 @@ public class CCPB extends CCP{
 		
 		return selected;
 	}
+	
+	/**
+	 * changes amount of points left shown in view on CCPB
+	 */
+	public void setPointsLeft(Integer newPointsLeft)
+	{
+		String points = newPointsLeft.toString();
+		pointsLeft.setText(points);
+	}
+	
+	/**
+	 * clears all attributes back to default
+	 * clears all attr points back to default
+	 * sets new points Left
+	 * @param points how many points left refreshed page has now
+	 */
+	public void resetPBinView(Integer points)
+	{
+		setPointsLeft(points);
+		int length = statCostArr.length;
+		for(int i = 0; i < length ; i++)
+		{
+			statCostArr[i].setText("0");
+			statCurrArr[i].setText("8");
+		}
+	}
 }

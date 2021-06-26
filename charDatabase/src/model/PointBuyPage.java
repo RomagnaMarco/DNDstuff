@@ -20,6 +20,8 @@ public class PointBuyPage {
 	private int WisPoint;
 	private int ChaPoint;
 	
+	private String[] attrStringArr = {"STR","DEX", "CON", "INT", "WIS", "CHA"};
+	
 	
 	public PointBuyPage()
 	{
@@ -51,7 +53,6 @@ public class PointBuyPage {
 		IntPoint = 0;
 		WisPoint = 0;
 		ChaPoint = 0;
-		
 	}
 
 	/**
@@ -262,6 +263,25 @@ public class PointBuyPage {
 			System.out.println("An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
 		}
 		
+	}
+	
+	/**
+	 * clears all attributes back to default
+	 * clears all attr points back to default
+	 * sets new points left
+	 * @param points how many points left refreshed page has now
+	 */
+	public void resetPBinModel(Integer points)
+	{
+		setPointsLeft(points);
+		int length = attrStringArr.length;
+		String attr;
+		for(int i = 0; i < length; i++)
+		{
+			attr = attrStringArr[i];
+			setAttribute(attr, 8);
+			setAttributePoints(attr, 0);
+		}
 	}
 	
 	/**

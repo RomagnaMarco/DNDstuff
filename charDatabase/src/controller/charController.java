@@ -512,7 +512,12 @@ public class charController {
 			//checks which button is performing the action event
 			if(e.getSource() == confirmB)
 			{
-				
+				int points = view.getSelectedPB();
+				//update in model
+				PBP.setSelected(points);
+				PBP.resetPBinModel(points);
+				//update in view
+				view.resetPBinView(points);
 			}
 			else if(e.getSource() == minusArr[0]) //STR minus
 			{
