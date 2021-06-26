@@ -503,7 +503,7 @@ public class charController {
 			this.PBP = PBP;
 			this.view = view;
 			plusArr = view.getPlusArr();
-			minusArr = view.getMinussArr();
+			minusArr = view.getMinusArr();
 			confirmB = view.getConfirmB();
 		}
 

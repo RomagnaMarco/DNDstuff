@@ -153,8 +153,8 @@ public class CCPB extends CCP{
 				rowArr[i].setLayout(layoutArr[i]);
 				
 				//create buttons
-				plusArr[ai] = new JButton("-");
-				minusArr[ai] = new JButton("+");
+				plusArr[ai] = new JButton("+");
+				minusArr[ai] = new JButton("-");
 				statCurrArr[ai] = new JLabel("8");
 				statCostArr[ai] = new JLabel("0");
 				
@@ -174,8 +174,8 @@ public class CCPB extends CCP{
 				
 				//add components to row
 				rowArr[i].add(ScoreLabelArr[ai]);
-				rowArr[i].add(plusArr[ai]);
 				rowArr[i].add(minusArr[ai]);
+				rowArr[i].add(plusArr[ai]);
 				rowArr[i].add(statCurrArr[ai]);
 				rowArr[i].add(statCostArr[ai]);
 				
@@ -320,7 +320,7 @@ public class CCPB extends CCP{
 	 * a getter for the minus buttons in CCPB
 	 * @return
 	 */
-	public JButton[] getMinussArr()
+	public JButton[] getMinusArr()
 	{
 		return minusArr;
 	}
