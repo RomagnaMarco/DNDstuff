@@ -661,7 +661,7 @@ public class charController {
 			{
 				valid = false;
 			}
-			if(attr == 16) //cannot add past 16
+			if(attr == 18) //cannot add past 18
 			{
 				valid = false;
 			}

@@ -71,9 +71,13 @@ public class PointBuyPage {
 			{
 				pN = 1;
 			}
-			else //attr == 15 || attr == 14
+			else if(attr == 15 || attr == 14)
 			{
 				pN = 2;
+			}
+			else //attr == 16 || attr == 17
+			{
+				pN = 3;
 			}
 		}
 		else //subtracting down
@@ -82,10 +86,14 @@ public class PointBuyPage {
 			{
 				pN = 1;
 			}
-			else //attr == 15
+			else if(attr == 15 || attr == 16)
 			{
 				pN = 2;
-			}	
+			}
+			else //attr == 17
+			{
+				pN = 3;
+			}
 		}
 		
 		return pN;
