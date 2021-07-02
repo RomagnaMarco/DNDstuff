@@ -639,7 +639,7 @@ public class charController {
 	
 	/**
 	 * Checks if enough points to modify that attribute score for a given attribute
-	 * also checks if it doesn't go over  16 or under 8.
+	 * also checks if it doesn't go over  18 or under 8.
 	 * @param AbilityScore checks this ability score to see if there enough points. uses the name to later pull from the
 	 * score stored in the model.
 	 * @param positive determines whether or not your trying to subtract or add from the points
