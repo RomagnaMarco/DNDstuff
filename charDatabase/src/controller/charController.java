@@ -24,32 +24,47 @@ public class charController {
 	private static Boolean DebugMRD = false;
 	private static JFrame frame;
 	static Boolean DRPBool= false; //value to remember if DRP is shown yet
+	static Boolean DRPpointBuy= false; //value to remember if pointbuy has been seen yet.
+	
+	//goto
+	static GoCCBP gccBP;
+	static GoCCRS gccRS;
+	static GoCCMS gccMS;
+	static GoDiceRollerL gdRollL;
+	static GoCC1L gcc1L;
+	static GoCC2L gcc2L;
+	static GoMMPL gmmpL;
+	//pages
+	static MMP menu;
+	static CCPB ccBP;
+	static PointBuyPage PBP;
+	static CC1P cc1p;
+	static CC2P cc2p;
+	//helper
+	static ManagePointBuyUI ui;
 	
 	/**
 	* constructor for character controller
 	* @param frame used to draw the pages
 	*/
-	public charController(JFrame frame) 
-	{
-		this.frame = frame;
-	}
+	public charController() {}
 	
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		MMP menu = new MMP(frame);
-		GoDiceRollerL d = new GoDiceRollerL(menu);
-		GoCCBP ccBP = new GoCCBP(menu);
-		GoCCRS ccRS = new GoCCRS(menu);
-		GoCCMS ccMS = new GoCCMS(menu);
-		menu.addDiceListener(d);
-		menu.addPBListener(ccBP);
-		menu.addSRListener(ccRS);
-		menu.addMSListener(ccMS);
-		menu.addDiceListener(d);
-		menu.addPBListener(ccBP);
-		menu.addSRListener(ccBP);
-		menu.addMSListener(ccBP);
+		frame = new JFrame();
+		menu = new MMP(frame);
+		gdRollL = new GoDiceRollerL();
+		gccBP = new GoCCBP();
+		gccRS = new GoCCRS();
+		gccMS = new GoCCMS();
+		menu.addDiceListener(gdRollL);
+		menu.addPBListener(gccBP);
+		menu.addSRListener(gccRS);
+		menu.addMSListener(gccMS);
+		menu.addDiceListener(gdRollL);
+		menu.addPBListener(gccBP);
+		menu.addSRListener(gccBP);
+		menu.addMSListener(gccBP);
 		
 		
 	}
@@ -64,10 +79,9 @@ public class charController {
 	static class GoDiceRollerL implements ActionListener
 	{
 		
-		MMP menu;
-		public GoDiceRollerL(MMP menu){
-			this.menu = menu;
-		}
+		
+		public GoDiceRollerL(){}
+		
 		public void actionPerformed(ActionEvent e)
 		{
 			//checks if previously opened or not.
@@ -97,28 +111,18 @@ public class charController {
 	 */
 	static class GoMMPL implements ActionListener
 	{
-		JFrame frame;
-		MMP menu;
-		GoDiceRollerL d;
-		
-		GoCCBP ccBP;
-		GoCCMS ccMS;
-		GoCCRS ccRS;
-		public GoMMPL(JFrame frame)
-		{
-			this.frame = frame;
-		}
+		public GoMMPL(){}
 		
 		public void actionPerformed(ActionEvent e) {
 			menu = new MMP(frame);
-			d = new GoDiceRollerL(menu);
-			ccBP = new GoCCBP(menu);
-			ccRS = new GoCCRS(menu);
-			ccMS = new GoCCMS(menu);
-			menu.addDiceListener(d);
-			menu.addPBListener(ccBP);
-			menu.addSRListener(ccRS);
-			menu.addMSListener(ccMS);
+			gdRollL = new GoDiceRollerL();
+			gccBP = new GoCCBP();
+			gccRS = new GoCCRS();
+			gccMS = new GoCCMS();
+			menu.addDiceListener(gdRollL);
+			menu.addPBListener(gccBP);
+			menu.addSRListener(gccRS);
+			menu.addMSListener(gccMS);
 
 		}
 		
@@ -132,26 +136,28 @@ public class charController {
 	 */
 	static class GoCCBP implements ActionListener
 	{
-		CCPB ccBP;
-		MMP menu;
-		GoMMPL b;
-		GoCC1L c;
-		PointBuyPage PBP;
-		ManagePointBuyUI ui;
-		public GoCCBP(MMP menu)
-		{
-			this.menu = menu;
-		}
+		public GoCCBP() {}
 		
 		public void actionPerformed(ActionEvent e) {
-			ccBP = new CCPB(menu.frame);
-			b = new GoMMPL(menu.frame);
-			c = new GoCC1L(menu);
-			ccBP.addBackListener(b);
-			ccBP.addContListener(c);
+			
+			ccBP = new CCPB(frame);
+			gmmpL = new GoMMPL(); //back to previous page
+			gcc1L = new GoCC1L(); //continue to next page
+			ccBP.addBackListener(gmmpL);
+			ccBP.addContListener(gcc1L);
 			
 			PBP = new PointBuyPage();
-			ui = new ManagePointBuyUI(PBP, ccBP);
+			ui = new ManagePointBuyUI();
+			
+			//save state if else segment
+			if (DRPpointBuy == false)
+			{
+				DRPpointBuy = true; //it has now been seen and is true.
+			}
+			else
+			{
+				//update information here
+			}
 			
 			/// all the plus and minus buttons. and the confirm button
 			ccBP.addConfirmListener(ui);
@@ -168,6 +174,8 @@ public class charController {
 			ccBP.addPlusCHAListener(ui);
 			ccBP.addMinusCHAListener(ui);
 			
+		
+			
 		}
 		
 	}
@@ -180,18 +188,14 @@ public class charController {
 	static class GoCCMS implements ActionListener
 	{
 		CCMS ccMS;
-		MMP menu;
 		GoMMPL b;
 		GoCC1L c;
-		public GoCCMS(MMP menu)
-		{
-			this.menu = menu;
-		}
+		public GoCCMS(){}
 		
 		public void actionPerformed(ActionEvent e) {
 			ccMS = new CCMS(menu.frame);
-			b = new GoMMPL(menu.frame);
-			c = new GoCC1L(menu);
+			b = new GoMMPL();
+			c = new GoCC1L();
 			ccMS.addBackListener(b);
 			ccMS.addContListener(c);
 			
@@ -208,18 +212,14 @@ public class charController {
 	static class GoCCRS implements ActionListener
 	{
 		CCRS ccRS;
-		MMP menu;
 		GoMMPL b;
 		GoCC1L c;
-		public GoCCRS(MMP menu)
-		{
-			this.menu = menu;
-		}
+		public GoCCRS(){}
 		
 		public void actionPerformed(ActionEvent e) {
 			ccRS = new CCRS(menu.frame);
-			b = new GoMMPL(menu.frame);
-			c = new GoCC1L(menu);
+			b = new GoMMPL();
+			c = new GoCC1L();
 			ccRS.addBackListener(b);
 			ccRS.addContListener(c);
 			
@@ -236,18 +236,14 @@ public class charController {
 	static public class GoCC1L implements ActionListener
 	{
 		CC1P cc1;
-		MMP menu;
 		GoCCBP b;
 		GoCC2L c;
-		public GoCC1L(MMP menu)
-		{
-			this.menu = menu;
-		}
+		public GoCC1L(){}
 		
 		public void actionPerformed(ActionEvent e) {
 			cc1 = new CC1P(menu.frame);
-			b = new GoCCBP(menu);
-			c = new GoCC2L(menu);
+			b = new GoCCBP();
+			c = new GoCC2L();
 			cc1.addBackListener(b);
 			cc1.addContListener(c);
 		}
@@ -262,16 +258,12 @@ public class charController {
 	static public class GoCC2L implements ActionListener
 	{
 		CC2P cc3;
-		MMP menu;
 		GoCC1L b;
-		public GoCC2L(MMP menu)
-		{
-			this.menu = menu;
-		}
+		public GoCC2L(){}
 		
 		public void actionPerformed(ActionEvent e) {
 			cc3 = new CC2P(menu.frame);
-			b = new GoCC1L(menu);
+			b = new GoCC1L();
 			cc3.addBackListener(b);
 		}
 		
@@ -493,15 +485,12 @@ public class charController {
 	
 	static class ManagePointBuyUI implements ActionListener
 	{
-		PointBuyPage PBP;
-		CCPB view;
+		CCPB view = ccBP;
 		JButton[] plusArr;
 		JButton[] minusArr;
 		JButton confirmB;
-		public ManagePointBuyUI(PointBuyPage PBP, CCPB view)
-		{ 
-			this.PBP = PBP;
-			this.view = view;
+		public ManagePointBuyUI()
+		{
 			plusArr = view.getPlusArr();
 			minusArr = view.getMinusArr();
 			confirmB = view.getConfirmB();
@@ -521,56 +510,56 @@ public class charController {
 			}
 			else if(e.getSource() == minusArr[0]) //STR minus
 			{
-				ModifyScore("STR", false, PBP, view);
+				ModifyScore("STR", false);
 			}
 			else if(e.getSource() == minusArr[1]) //DEX minus
 			{
-				ModifyScore("DEX", false, PBP, view);
+				ModifyScore("DEX", false);
 			}
 			else if(e.getSource() == minusArr[2]) //CON minus
 			{
-				ModifyScore("CON", false, PBP, view);
+				ModifyScore("CON", false);
 			}
 			else if(e.getSource() == minusArr[3]) //INT minus
 			{
-				ModifyScore("INT", false, PBP, view);
+				ModifyScore("INT", false);
 			}
 			else if(e.getSource() == minusArr[4]) //WIS minus
 			{
-				ModifyScore("WIS", false, PBP, view);
+				ModifyScore("WIS", false);
 			}
 			else if(e.getSource() == minusArr[5]) //CHA minus
 			{
-				ModifyScore("CHA", false, PBP, view);
+				ModifyScore("CHA", false);
 			}
 			else if(e.getSource() == plusArr[0]) //STR plus
 			{
-				ModifyScore("STR", true, PBP, view);
+				ModifyScore("STR", true);
 			}
 			else if(e.getSource() == plusArr[1]) //DEX plus
 			{
-				ModifyScore("DEX", true, PBP, view);
+				ModifyScore("DEX", true);
 			}
 			else if(e.getSource() == plusArr[2]) //CON plus
 			{
-				ModifyScore("CON", true, PBP, view);
+				ModifyScore("CON", true);
 			}
 			else if(e.getSource() == plusArr[3]) //INT plus
 			{
-				ModifyScore("INT", true, PBP, view);
+				ModifyScore("INT", true);
 			}
 			else if(e.getSource() == plusArr[4]) //WIS plus
 			{
-				ModifyScore("WIS", true, PBP, view);
+				ModifyScore("WIS", true);
 			}
 			else if(e.getSource() == plusArr[5]) //CHA plus
 			{
-				ModifyScore("CHA", true, PBP, view);
+				ModifyScore("CHA", true);
 			}
 			else
 			{
 				System.out.println("Something has gone wrong in charController.java in the "
-						+ "  ManagePointBuyUI static class during the actionPerformed Event");
+						+ "ManagePointBuyUI static class during the actionPerformed Event");
 			}
 			
 		}
@@ -585,11 +574,11 @@ public class charController {
 	 * Changes will also reflect with the points left option.
 	 * By default, points are currently set at 27. (this may change)
 	 * @param attr The attribute value. Given string of name of attribute
-	 * @param PBP the model to grab info from.
 	 * @param positive to determine whether or not to add or subtract from the score
 	 */
-	public static void ModifyScore(String attr, boolean positive, PointBuyPage PBP, CCPB view)
+	public static void ModifyScore(String attr, boolean positive)
 	{
+		CCPB view = ccBP;
 		int selectedItem = view.getSelectedPB();
 		int pos = 1;
 		if (positive == false)
@@ -597,7 +586,7 @@ public class charController {
 			pos*= -1;
 		}
 		
-		if(checkScore(attr, positive, PBP, selectedItem) == true) //sufficient points
+		if(checkScore(attr, positive, selectedItem) == true) //sufficient points
 		{
 			//retrieve values from model
 			int pointsNeeded = PBP.getPointsNeeded(PBP.getAttribute(attr), positive);
@@ -645,7 +634,7 @@ public class charController {
 	 * @param positive determines whether or not your trying to subtract or add from the points
 	 * @return if able to modify this attribute
 	 */
-	public static boolean checkScore(String attrName, boolean positive, PointBuyPage PBP, int SelectedItem)
+	public static boolean checkScore(String attrName, boolean positive, int SelectedItem)
 	{
 		boolean valid = true; //true by default
 		
