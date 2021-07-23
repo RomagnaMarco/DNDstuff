@@ -220,6 +220,37 @@ public class CCPB extends CCP{
 	}
 	
 	/**
+	 * Updates to save state from info passed into the controller from the model.
+	 * When you re-enter the CCPB, it should have the old information shown.
+	 * @param pointsLeft the amount of unspent points for the player to still use
+	 * @param abScorePoints an array stored with the points allocated to the ability scores in conventional order.
+	 * @param abScores an array stored of the ability scores in conventional order. STR->DEX->CON->INT->WIS->CHA
+	 * @param selectedP the amount of Points given to the player to use via drop down(JComboBox)
+	 */
+	public void LoadSave(Integer selectedP, Integer[] abScores, Integer[] abScorePoints, Integer pointsLeft)
+	{
+		//handle total points
+		pointDropDown.setSelectedItem(selectedP);
+		//handle ability scores
+		modifyAttribute("STR", abScores[0]);
+		modifyAttribute("DEX", abScores[1]);
+		modifyAttribute("CON", abScores[2]);
+		modifyAttribute("INT", abScores[3]);
+		modifyAttribute("WIS", abScores[4]);
+		modifyAttribute("CHA", abScores[5]);
+		//handle points
+		modifyPointsAllocated("STR", abScorePoints[0]);
+		modifyPointsAllocated("DEX", abScorePoints[1]);
+		modifyPointsAllocated("CON", abScorePoints[2]);
+		modifyPointsAllocated("INT", abScorePoints[3]);
+		modifyPointsAllocated("WIS", abScorePoints[4]);
+		modifyPointsAllocated("CHA", abScorePoints[5]);
+		
+		//handle points left
+		modifyPointsLeft(pointsLeft);
+	}
+	
+	/**
 	 * Shows new pointsLeft in view to reflect the change also happening in the model
 	 * 
 	 * @param pointsLeftModel points left stored in the model

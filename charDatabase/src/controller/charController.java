@@ -21,10 +21,14 @@ import view.*;
  */
 public class charController {
 
+	//debugging messages
+	private static Boolean DebugMain = true;
+	private static Boolean DebugGoCCBP = true;
 	private static Boolean DebugMRD = false;
+	
 	private static JFrame frame;
-	static Boolean DRPBool= false; //value to remember if DRP is shown yet
-	static Boolean DRPpointBuy= false; //value to remember if pointbuy has been seen yet.
+	static Boolean DRPBool = false; //value to remember if DRP is shown yet
+	static Boolean DRPpointBuy = false; //value to remember if point buy has been initialized yet.
 	
 	//goto
 	static GoCCBP gccBP;
@@ -51,23 +55,51 @@ public class charController {
 	
 	
 	public static void main(String[] args) {
+		Debug("main","Creating Main Menu");
 		frame = new JFrame();
 		menu = new MMP(frame);
+		Debug("main","Adding Page Navigation Options in Main Menu");
 		gdRollL = new GoDiceRollerL();
 		gccBP = new GoCCBP();
 		gccRS = new GoCCRS();
-		gccMS = new GoCCMS();
-		menu.addDiceListener(gdRollL);
-		menu.addPBListener(gccBP);
-		menu.addSRListener(gccRS);
+		gccMS = new GoCCMS();          
+		Debug("main","Adding ActionListeners to Buttons in Main Menu");
+		menu.addDiceListener(gdRollL); 
+		menu.addPBListener(gccBP);     
+		menu.addSRListener(gccRS);    
 		menu.addMSListener(gccMS);
-		menu.addDiceListener(gdRollL);
-		menu.addPBListener(gccBP);
-		menu.addSRListener(gccBP);
-		menu.addMSListener(gccBP);
+		Debug("main",""); 
+		
+									   
 		
 		
 	}
+	
+	
+	/**
+	 * Debugger . Switch local variable on in charController to see Debug messages
+	 * private. no using in other classes.
+	 * Options: main, ModRollDisplay, GoCCBP
+	 * @param message takes in debug message to print
+	 * @param method Which method it's in
+	 */
+	private static void Debug(String method, String message)
+	{
+		if(DebugMain == true && method.equals("main"))
+		{
+			System.out.println(message);
+		}
+		else if(DebugMRD == true && method.equals("ModRollDisplay"))
+		{
+			System.out.println(message);
+		}
+		else if(DebugGoCCBP == true && method.equals("GoCCBP"))
+		{
+			System.out.println(message);
+		}
+		
+	}
+	
 	
 	//Go -method/thing- L (L stands for listener) format
 	
@@ -139,7 +171,6 @@ public class charController {
 		public GoCCBP() {}
 		
 		public void actionPerformed(ActionEvent e) {
-			
 			ccBP = new CCPB(frame);
 			gmmpL = new GoMMPL(); //back to previous page
 			gcc1L = new GoCC1L(); //continue to next page
@@ -150,13 +181,51 @@ public class charController {
 			ui = new ManagePointBuyUI();
 			
 			//save state if else segment
-			if (DRPpointBuy == false)
+			if(DRPpointBuy == false)
 			{
-				DRPpointBuy = true; //it has now been seen and is true.
+				
+				Debug("GoCCBP","Initializing");
+				
+				DRPpointBuy = true; //it has now been initialized and is true.
+				
 			}
 			else
 			{
+				Debug("GoCCBP","Loading old Data");
 				//update information here
+				
+				//take from Model. modify in view
+				
+				//stats
+				int STR = PBP.getAttribute("STR");
+				int DEX = PBP.getAttribute("DEX");
+				int CON = PBP.getAttribute("CON");
+				int INT = PBP.getAttribute("INT");
+				int WIS = PBP.getAttribute("WIS");
+				int CHA = PBP.getAttribute("CHA");
+				
+				//points
+				int STRp = PBP.getAttributePoints("STR");
+				int DEXp = PBP.getAttributePoints("DEX");
+				int CONp = PBP.getAttributePoints("CON");
+				int INTp = PBP.getAttributePoints("INT");
+				int WISp = PBP.getAttributePoints("WIS");
+				int CHAp = PBP.getAttributePoints("CHA");
+				
+				Integer[] abScores = {STR, DEX, CON, INT, WIS, CHA};
+				Integer[] abScorePoints = {STRp, DEXp, CONp, INTp, WISp, CHAp};
+				Integer selectedP = PBP.getSelected();
+				Integer pointsLeft = selectedP - STRp + DEXp + CONp + INTp + WISp +CHAp;
+				
+				//update View
+				Debug("GoCCBP", "STR: " +Integer.toString(STR));
+				Debug("GoCCBP", "DEX: " +Integer.toString(DEX));
+				Debug("GoCCBP", "CON: " +Integer.toString(CON));
+				Debug("GoCCBP", "INT: " +Integer.toString(INT));
+				Debug("GoCCBP", "WIS: " +Integer.toString(WIS));
+				Debug("GoCCBP", "CHA: " +Integer.toString(CHA));
+				ccBP.LoadSave(selectedP, abScores, abScorePoints, pointsLeft);
+				
 			}
 			
 			/// all the plus and minus buttons. and the confirm button
@@ -236,7 +305,7 @@ public class charController {
 	static public class GoCC1L implements ActionListener
 	{
 		CC1P cc1;
-		GoCCBP b;
+		GoCCBP b ;
 		GoCC2L c;
 		public GoCC1L(){}
 		
@@ -314,82 +383,82 @@ public class charController {
 		int numDice = DRlist.size()-1;
 		for(int listIndex = 0; listIndex < numDice+1; listIndex++)
 		{
-			DebugMRD("\n"+"Entering For(Loop). Index: "+listIndex+"/"+numDice+"\n");
+			Debug("ModRollDisplay","\n"+"Entering For(Loop). Index: "+listIndex+"/"+numDice+"\n");
 			String displayRow= "";
 			strDice = "";
 			strEnd = "): ";
 			//populates each dice Row
 			if(listIndex  == 0) //d4
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				strFront = "D4(";
 				for(int j = 0; j < DRlist.get(listIndex); j++){
 					diceRow.add(DiceRoll(1,5));
 					}
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex == 1) //d6
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				strFront = "D6(";
 				for(int j = 0; j < DRlist.get(listIndex ); j++){
 					diceRow.add(DiceRoll(1,7));
 				}
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 2) //d8
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				
 				strFront = "D8(";
 				for(int j = 0; j < DRlist.get(listIndex ); j++){
 					diceRow.add(DiceRoll(1,8));
 					}
 				
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 3) //d10
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				
 				strFront = "D10(";
 				for(int j = 0; j < DRlist.get(listIndex ); j++){
 					diceRow.add(DiceRoll(1,11));
 					}
 				
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 4) //d12
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				
 				strFront = "D12(";
 				for(int j = 0; j < DRlist.get(listIndex ); j++){
 					diceRow.add(DiceRoll(1,13));
 					}
 				
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else if (listIndex  == 5) //d20
 			{
-				DebugMRD("@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
-				DebugMRD("Dice to be added to DiceRow= "+ DRlist.get(listIndex));
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+DRlist.get(listIndex) +" Dice counted");
+				Debug("ModRollDisplay","Dice to be added to DiceRow= "+ DRlist.get(listIndex));
 				
 				strFront = "D20(";
 				for(int j = 0; j < DRlist.get(listIndex ); j++){
 					diceRow.add(DiceRoll(1,21));
 				}
 				
-				DebugMRD("DiceRow num of dice= "+ diceRow.size());
+				Debug("ModRollDisplay","DiceRow num of dice= "+ diceRow.size());
 			}
 			else //bonus
 			{
-				DebugMRD("@ "+listIndex+"\n"+"Bonus Reached");
+				Debug("ModRollDisplay","@ "+listIndex+"\n"+"Bonus Reached");
 				strFront = "Bonus: ";
 				diceRow.add(DRlist.get(listIndex)); //just gets the num of bonus
 				strEnd = "";
@@ -470,18 +539,6 @@ public class charController {
 		 return (int) Math.floor(Math.random()*(max - min) + min);
 	 }
 	
-	/**
-	 * Debugger for ModRollDisplay. Switch local variable on in charController to see Debug messages
-	 * private. no using in other classes.
-	 * @param message takes in debug message to print
-	 */
-	private static void DebugMRD(String message)
-	{
-		if(DebugMRD == true)
-		{
-			System.out.println(message);
-		}
-	}
 	
 	static class ManagePointBuyUI implements ActionListener
 	{
