@@ -129,6 +129,14 @@ public class DRP
 			
 	}
 	
+	/**
+	 * Error Messages. starting at 001. Control F to find them
+	 * @param message
+	 */
+	private static void DRPError(String message)
+	{
+		System.out.println("DRP Error "+ message);
+	}
 
 	/**
 	 * Returns the display from the dice roller popup

@@ -56,6 +56,15 @@ public class PointBuyPage {
 	}
 
 	/**
+	 * Error Messages. starting at 001. Control F to find them
+	 * @param message
+	 */
+	private static void DRPError(String message)
+	{
+		System.out.println("PointBuyPage Error "+ message);
+	}
+	
+	/**
 	 * returns value of points needed for the value of the attribute given
 	 * default value returned is 1000, for when a range problem occur
 	 * @param attr being checked for how points are needed to modify
@@ -182,7 +191,7 @@ public class PointBuyPage {
 		}
 		else
 		{
-			System.out.println("An Error has occurred in the getAttribute() method. Check inputed String, it does not match the presets.");
+			DRPError("001. An Error has occurred in the getAttribute() method. Check inputed String, it does not match the presets.");
 		}
 		if(desiredValue == 100)
 		{
@@ -225,7 +234,7 @@ public class PointBuyPage {
 		}
 		else
 		{
-			System.out.println("An Error has occurred in the getAttributePoints() method. Check inputed String, it does not match the presets.");
+			DRPError("002. An Error has occurred in the getAttributePoints() method. Check inputed String, it does not match the presets.");
 		}
 		if(desiredValue == 100)
 		{
@@ -268,7 +277,7 @@ public class PointBuyPage {
 		}
 		else
 		{
-			System.out.println("An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
+			DRPError("003. An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
 		}
 		
 	}
@@ -326,7 +335,7 @@ public class PointBuyPage {
 		}
 		else
 		{
-			System.out.println("An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
+			DRPError("004. An Error has occurred in the setAttributePoints() method. Check inputed String, it does not match the presets.");
 		}
 		
 	}

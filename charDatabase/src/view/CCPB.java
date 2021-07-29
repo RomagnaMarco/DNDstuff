@@ -219,6 +219,16 @@ public class CCPB extends CCP{
 		
 	}
 	
+	
+	/**
+	 * Error Messages. starting at 001. Control F to find them
+	 * @param message
+	 */
+	private static void CCPBError(String message)
+	{
+		System.out.println("CCPB Error " + message);
+	}
+	
 	/**
 	 * Updates to save state from info passed into the controller from the model.
 	 * When you re-enter the CCPB, it should have the old information shown.
@@ -320,7 +330,7 @@ public class CCPB extends CCP{
 		}
 		else
 		{
-			System.out.println("An Error has occurred in the findArrIndexWithAttrAbbreviation() method. Check inputed String, it does not match the presets.");
+			CCPBError("001. An Error has occurred in the findArrIndexWithAttrAbbreviation() method. Check inputed String, it does not match the presets.");
 		}
 		if(desiredIndex == 100)
 		{

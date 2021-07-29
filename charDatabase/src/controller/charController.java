@@ -75,6 +75,14 @@ public class charController {
 		
 	}
 	
+	/**
+	 * Error Messages. starting at 001. Control F to find them
+	 * @param message
+	 */
+	private static void ControllerError(String message)
+	{
+		System.out.println("Controller Error "+ message);
+	}
 	
 	/**
 	 * Debugger . Switch local variable on in charController to see Debug messages
@@ -177,12 +185,12 @@ public class charController {
 			ccBP.addBackListener(gmmpL);
 			ccBP.addContListener(gcc1L);
 			
-			PBP = new PointBuyPage();
-			ui = new ManagePointBuyUI();
 			
 			//save state if else segment
 			if(DRPpointBuy == false)
 			{
+				PBP = new PointBuyPage();
+				ui = new ManagePointBuyUI();
 				
 				Debug("GoCCBP","Initializing");
 				
@@ -191,10 +199,13 @@ public class charController {
 			}
 			else
 			{
+				
 				Debug("GoCCBP","Loading old Data");
 				//update information here
 				
 				//take from Model. modify in view
+				
+				
 				
 				//stats
 				int STR = PBP.getAttribute("STR");
@@ -615,8 +626,9 @@ public class charController {
 			}
 			else
 			{
-				System.out.println("Something has gone wrong in charController.java in the "
-						+ "ManagePointBuyUI static class during the actionPerformed Event");
+				ControllerError("001. Something has gone wrong in the "
+						+ "ManagePointBuyUI static class during the actionPerformed Event "
+						+ "e.getsource() != any values selected in plusArr[] or minus[]");
 			}
 			
 		}
