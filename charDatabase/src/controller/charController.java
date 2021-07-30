@@ -192,12 +192,12 @@ public class charController {
 			ccBP.addBackListener(gmmpL);
 			ccBP.addContListener(gcc1L);
 			
+			ui = new ManagePointBuyUI();
 			
 			//save state if else segment
 			if(DRPpointBuy == false)
 			{
 				PBP = new PointBuyPage();
-				ui = new ManagePointBuyUI();
 				
 				Debug("GoCCBP","Initializing");
 				
@@ -211,7 +211,6 @@ public class charController {
 				//update information here
 				
 				//take from Model. modify in view
-				
 				
 				
 				//stats
@@ -569,6 +568,8 @@ public class charController {
 		JButton[] plusArr;
 		JButton[] minusArr;
 		JButton confirmB;
+		
+		
 		public ManagePointBuyUI() 
 		{
 			//retrieve from global variables in controller class
@@ -578,6 +579,7 @@ public class charController {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			
 			
 			//checks which button is performing the action event
 			if(e.getSource() == confirmB)
