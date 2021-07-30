@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.EventObject;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,6 +26,7 @@ public class charController {
 	private static Boolean DebugMain = true;
 	private static Boolean DebugGoCCBP = true;
 	private static Boolean DebugMRD = false;
+	private static Boolean DebugManagePointBuyUI = true;
 	
 	private static JFrame frame;
 	static Boolean DRPBool = false; //value to remember if DRP is shown yet
@@ -46,6 +48,7 @@ public class charController {
 	static CC2P cc2p;
 	//helper
 	static ManagePointBuyUI ui;
+	
 	
 	/**
 	* constructor for character controller
@@ -87,7 +90,7 @@ public class charController {
 	/**
 	 * Debugger . Switch local variable on in charController to see Debug messages
 	 * private. no using in other classes.
-	 * Options: main, ModRollDisplay, GoCCBP
+	 * Options: main, ModRollDisplay, GoCCBP, ManagePointBuyUI
 	 * @param message takes in debug message to print
 	 * @param method Which method it's in
 	 */
@@ -102,6 +105,10 @@ public class charController {
 			System.out.println(message);
 		}
 		else if(DebugGoCCBP == true && method.equals("GoCCBP"))
+		{
+			System.out.println(message);
+		}
+		else if(DebugManagePointBuyUI == true && method.equals("ManagePointBuyUI"))
 		{
 			System.out.println(message);
 		}
@@ -259,6 +266,7 @@ public class charController {
 		}
 		
 	}
+	
 	
 	/**
 	 * Sends to CCMS (character creation phase 0 page = manual Select)
@@ -550,15 +558,20 @@ public class charController {
 		 return (int) Math.floor(Math.random()*(max - min) + min);
 	 }
 	
-	
+	/**
+	 * Handles PointBuy from Controller.
+	 * @author Marco
+	 *
+	 */
 	static class ManagePointBuyUI implements ActionListener
 	{
 		CCPB view = ccBP;
 		JButton[] plusArr;
 		JButton[] minusArr;
 		JButton confirmB;
-		public ManagePointBuyUI()
+		public ManagePointBuyUI() 
 		{
+			//retrieve from global variables in controller class
 			plusArr = view.getPlusArr();
 			minusArr = view.getMinusArr();
 			confirmB = view.getConfirmB();
@@ -624,11 +637,15 @@ public class charController {
 			{
 				ModifyScore("CHA", true);
 			}
+			else if(e.getSource() == plusArr[5]) //CHA plus
+			{
+				ModifyScore("CHA", true);
+			}
 			else
 			{
 				ControllerError("001. Something has gone wrong in the "
-						+ "ManagePointBuyUI static class during the actionPerformed Event "
-						+ "e.getsource() != any values selected in plusArr[] or minus[]");
+						+ "ManagePointBuyUI static class during the actionPerformed Event: "
+						+ "e.getsource() != any values selected in plusArr[] or minusArr[]");
 			}
 			
 		}
